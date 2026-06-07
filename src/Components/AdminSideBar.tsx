@@ -1,0 +1,59 @@
+import { cn } from "../utilities/classNames";
+import { FaHome } from "react-icons/fa";
+import { FaFile } from "react-icons/fa";
+import { FaMap } from "react-icons/fa";
+import { FaUserGroup } from "react-icons/fa6";
+
+export const AdminSideBar = ({ active = "dashboard" }: { active: string }) => {
+  return (
+    <nav className={cn("text-custom-white bg-deep w-50 h-dvh")}>
+      <h1 className={cn("text-xl font-bold pl-4 pt-10 mb-5")}>FPOG CRS</h1>
+
+      <ul className={cn("")}>
+        {/* ====== Dashboard link ====== */}
+        <li
+          className={cn(
+            "flex items-center gap-2 p-4 hover:bg-navy cursor-pointer",
+            active === "dashboard" && "text-blue-600",
+          )}
+        >
+          <FaHome className={cn("text-xl")} />
+          Dashboard
+        </li>
+
+        {/* ====== Reports link ====== */}
+        <li
+          className={cn(
+            "flex items-center gap-2 p-4 hover:bg-navy cursor-pointer",
+            active === "reports" && "text-blue-600",
+          )}
+        >
+          <FaFile className={cn("text-xl")} />
+          Reports
+        </li>
+
+        {/* ====== Map View link ====== */}
+        <li
+          className={cn(
+            "flex items-center gap-2 p-4 hover:bg-navy cursor-pointer",
+            active === "map" && "text-blue-600",
+          )}
+        >
+          <FaMap className={cn("text-xl")} />
+          Map View
+        </li>
+
+        {/* ====== Users link ====== */}
+        <li
+          className={cn(
+            "flex items-center gap-2 p-4 hover:bg-navy cursor-pointer",
+            active === "users" && "text-blue-600",
+          )}
+        >
+          <FaUserGroup className={cn("text-xl")} />
+          Users
+        </li>
+      </ul>
+    </nav>
+  );
+};

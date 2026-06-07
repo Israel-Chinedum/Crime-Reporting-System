@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@theme {
+  --color-navy: #0a1628;
+  --color-deep: #0d1f3c;
+  --color-custom-blue: #1a3a6b;
+  --color-accent: #e63946;
+  --color-gold: #f4a200;
+  --color-ice: #a8c8e8;
+  --color-light: #eaf2ff;
+  --color-custom-white: #f8fbff;
+  --color-muted: #7a9bb5;
+  --color-custom-green: #2ecc71;
+  --color-custom-orange: #f39c12;
+  --color-panel: rgba(255, 255, 255, 0.03);
+  --color-border: rgba(168, 200, 232, 0.1);
+  --color-accent-dim: rgba(230, 57, 70, 0.15);
+
+  /* ====== CUSTOM BREAK POINTS ====== */
+  --breakpoint-mobile: 460px;
+  --breakpoint-smobile: 320px;
+}
+
+body {
+  background-color: var(--color-navy);
+}
+
+.input {
+  /* below small mobile screens */
+  @apply border-muted outline-none p-2 w-[95%];
+
+  /* above small mobile screens */
+  @apply smobile:w-[80%];
+
+  /* above mobile screens */
+  @apply mobile:p-3 border  mobile:w-100 rounded-md mobile:text-xl;
+}
