@@ -1,10 +1,17 @@
 import { cn } from "../utilities/classNames";
-import { FaHome } from "react-icons/fa";
+import { FaBell, FaHome } from "react-icons/fa";
 import { FaFile } from "react-icons/fa";
 import { FaMap } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
-export const AdminSideBar = ({ active = "dashboard" }: { active: string }) => {
+type adminDashboard = {
+  active: "dashboard" | "reports" | "map" | "users" | "alerts";
+};
+
+export const AdminSideBar = ({ active = "dashboard" }: adminDashboard) => {
+  const navigate = useNavigate();
+
   return (
     <nav className={cn("text-custom-white bg-deep w-50 h-dvh")}>
       <h1 className={cn("text-xl font-bold pl-4 pt-10 mb-5")}>FPOG CRS</h1>
@@ -16,6 +23,7 @@ export const AdminSideBar = ({ active = "dashboard" }: { active: string }) => {
             "flex items-center gap-2 p-4 hover:bg-navy cursor-pointer",
             active === "dashboard" && "text-blue-600",
           )}
+          onClick={() => navigate("/admin-dashboard")}
         >
           <FaHome className={cn("text-xl")} />
           Dashboard
@@ -27,9 +35,22 @@ export const AdminSideBar = ({ active = "dashboard" }: { active: string }) => {
             "flex items-center gap-2 p-4 hover:bg-navy cursor-pointer",
             active === "reports" && "text-blue-600",
           )}
+          onClick={() => navigate("/admin-reports")}
         >
           <FaFile className={cn("text-xl")} />
           Reports
+        </li>
+
+        {/* ====== Alerts link ====== */}
+        <li
+          className={cn(
+            "flex items-center gap-2 p-4 hover:bg-navy cursor-pointer",
+            active === "alerts" && "text-blue-600",
+          )}
+          onClick={() => navigate("/admin-alerts")}
+        >
+          <FaBell className={cn("text-xl")} />
+          Alerts
         </li>
 
         {/* ====== Map View link ====== */}
@@ -38,6 +59,7 @@ export const AdminSideBar = ({ active = "dashboard" }: { active: string }) => {
             "flex items-center gap-2 p-4 hover:bg-navy cursor-pointer",
             active === "map" && "text-blue-600",
           )}
+          onClick={() => navigate("/admin-map")}
         >
           <FaMap className={cn("text-xl")} />
           Map View

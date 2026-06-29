@@ -3,6 +3,7 @@ import { cn } from "../../../utilities/classNames";
 import { Stepper } from "../../../Components/Stepper";
 import { Button } from "../../../Components/Button";
 import { SideBar } from "../../../Components/SideBar";
+import { getLocation } from "../../../utilities/getLocation";
 
 export const IncidentDetails = () => {
   return (
@@ -14,6 +15,8 @@ export const IncidentDetails = () => {
           "overflow-y-auto w-full",
         )}
       >
+        <Button onClick={() => getLocation()}>Get Location</Button>
+
         <div className={cn("w-full")}>
           {/* ====== HEADER ====== */}
           <InAppHeader content="Report a Crime" routeBack="/home" />

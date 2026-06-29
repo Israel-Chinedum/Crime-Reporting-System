@@ -7,7 +7,7 @@ export const SideBar = ({
   active,
   classes,
 }: {
-  active: string;
+  active: "home" | "alerts" | "profile";
   classes?: string;
 }) => {
   const navigate = useNavigate();

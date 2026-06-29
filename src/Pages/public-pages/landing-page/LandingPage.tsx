@@ -10,10 +10,15 @@ export const LandingPage = () => {
       id="login-page"
       className={cn(" text-custom-white h-dvh flex flex-col items-center")}
     >
+      <img
+        src="/fpog-logo-Photoroom.png"
+        className={cn("w-50 mobile:w-70 sm:w-100")}
+        alt=""
+      />
       <h1
         className={cn(
           // below mobile screens
-          "mx-2 text-xl text-center font-bold mb-4 mt-50",
+          "mx-2 text-xl text-center font-bold mb-4",
           // above mobile screens
           "mobile:text-3xl",
           // above small tablets

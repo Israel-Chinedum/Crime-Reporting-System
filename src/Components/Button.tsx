@@ -1,4 +1,4 @@
-import type { MouseEventHandler } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 import { cn } from "../utilities/classNames";
 
 export const Button = ({
@@ -6,7 +6,7 @@ export const Button = ({
   classes = "",
   onClick,
 }: {
-  children: string;
+  children: ReactNode;
   classes?: string;
   onClick?: MouseEventHandler;
 }) => {

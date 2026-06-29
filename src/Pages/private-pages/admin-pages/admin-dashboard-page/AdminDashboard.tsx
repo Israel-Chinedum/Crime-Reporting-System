@@ -4,6 +4,7 @@ import { FaCalendar } from "react-icons/fa";
 import { FaArrowUp } from "react-icons/fa";
 import { FaBarsProgress } from "react-icons/fa6";
 import { DoughnutChart } from "../../../../Components/DoughnutChart";
+import { TrendChart } from "../../../../Components/TrendChart";
 
 export const AdminDashboard = () => {
   return (
@@ -110,13 +111,17 @@ export const AdminDashboard = () => {
 /       */}
 
         {/* ====== CHARTS ====== */}
-        <div className={cn("mt-10")}>
+        <div
+          className={cn(
+            "mt-10 grid grid-cols-[repeat(auto-fit,minmax(500px,1fr))] gap-5",
+          )}
+        >
           {/* ====== DOUGHNUT CHART ====== */}
-          <div className={cn("bg-deep w-max py-4 px-6 rounded-xl")}>
+          <div className={cn("bg-deep w py-4 px-6 rounded-xl")}>
             <h1 className={cn("mb-5 text-xl font-bold")}>Reports by Status</h1>
             <div className={cn("flex items-center gap-8")}>
               {/* ====== Chart ====== */}
-              <div className={cn("w-60 relative")}>
+              <div className={cn("w-60 relative no-svg-outline")}>
                 <h1
                   className={cn(
                     "absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%]",
@@ -170,13 +175,19 @@ export const AdminDashboard = () => {
             </div>
           </div>
 
-          <div>
-            <h1>Reports by Trend (This Week)</h1>
+          {/* ====== LINE CHART ====== */}
+          <div className={cn("bg-deep py-4 px-6 rounded-xl")}>
+            <h1 className={cn("text-xl font-bold mb-5")}>
+              Reports by Trend (This Week)
+            </h1>
+            <div className={cn("no-svg-outline")}>
+              <TrendChart />
+            </div>
           </div>
         </div>
 
         {/* ====== RECENT REPORTS ====== */}
-        <div className={cn("mt-10 bg-deep p-3 rounded-xl")}>
+        <div className={cn("mt-10 mb-5 bg-deep p-3 rounded-xl")}>
           <div className={cn("mb-4 flex items-center justify-between")}>
             <h1 className={cn("text-xl font-bold")}>Recent Reports</h1>
             <p className={cn("text-blue-600 cursor-pointer")}>

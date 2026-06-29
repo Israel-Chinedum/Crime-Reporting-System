@@ -32,5 +32,21 @@ body {
   @apply smobile:w-[80%];
 
   /* above mobile screens */
-  @apply mobile:p-3 border  mobile:w-100 rounded-md mobile:text-xl;
+  @apply mobile:p-3 border  mobile:w-100 rounded-md mobile:text-[1.1rem];
+}
+
+@layer utilities {
+  .no-svg-outline svg:focus,
+  .no-svg-outline svg *:focus {
+    outline: none;
+  }
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0d1f3c;
+  border-radius: 1rem;
 }

@@ -2,9 +2,11 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { useHomePage } from "./useHomePage";
 import { cn } from "../../../utilities/classNames";
 import { SideBar } from "../../../Components/SideBar";
+import { useNavigate } from "react-router-dom";
 
 export const HomePage = () => {
   const { quickActions } = useHomePage();
+  const navigate = useNavigate();
 
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
@@ -57,6 +59,10 @@ export const HomePage = () => {
                 "bg-deep px-2 py-4 rounded-md flex flex-col",
                 "items-center gap-2 cursor-default",
               )}
+              onClick={() => {
+                action.name === "Report a Crime" &&
+                  navigate("/incident-details");
+              }}
             >
               <span className={cn("text-4xl text-custom-green")}>
                 {action.icon}
