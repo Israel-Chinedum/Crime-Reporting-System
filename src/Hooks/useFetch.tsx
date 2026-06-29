@@ -1,5 +1,5 @@
 export const useFetch = () => {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "https://crime-reporting-system-server.onrender.com";
 
   //   ====== HANDLE GET REQUEST ======
   const getRequest = async (route: string) => {
