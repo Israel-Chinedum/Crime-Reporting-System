@@ -12,7 +12,7 @@ export const LandingPage = () => {
     >
       <div
         className={cn(
-          "w-50 mobile:w-70 sm:w-100 h-[50dvh flex flex-col justify-center",
+          "w-50 mobile:w-70 sm:w-100 h-[50dvh] bg-accent flex flex-col justify-center",
         )}
       >
         <img
