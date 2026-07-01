@@ -16,7 +16,7 @@ export const LandingPage = () => {
         )}
       >
         <img
-          src="/fpog-logo-Photoroom.png"
+          src="/fpog-logo.png"
           className={cn("w-50 mobile:w-70 sm:w-100")}
           alt=""
         />
