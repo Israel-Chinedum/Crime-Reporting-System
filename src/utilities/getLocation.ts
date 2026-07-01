@@ -1,12 +1,16 @@
-export const getLocation = async () => {
+import type { messageType } from "../Contexts/MessageContext";
+
+export const getLocation = (showMessage: (arg: messageType) => void) => {
   if ("geolocation" in navigator) {
-    return navigator.geolocation.getCurrentPosition(
+    let pos: string;
+    navigator.geolocation.getCurrentPosition(
       (position) => {
-        return {
+        const data = JSON.stringify({
           accuracy: position.coords.accuracy,
           lat: position.coords.latitude,
           long: position.coords.longitude,
-        };
+        });
+        showMessage({ text: data, status: "normal", timeout: null });
       },
       (error) => {
         console.log("ERROR: ", error);
@@ -16,7 +20,14 @@ export const getLocation = async () => {
     // navigator.permissions
     //   .query({ name: "geolocation" })
     //   .then((result) => console.log("RESULT STATE: ", result.state));
+
+    return new Promise((resolve) => {
+      if (pos) {
+        return resolve(pos);
+      }
+    });
   } else {
     console.log("Geolocation not supported by this browser");
+    return "Geolocation not supported by this browser";
   }
 };

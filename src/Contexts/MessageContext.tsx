@@ -1,7 +1,7 @@
 import { createContext, useRef, useState, type ReactNode } from "react";
 import { cn } from "../utilities/classNames";
 
-type messageType = {
+export type messageType = {
   text: string;
   status: "success" | "normal" | "warning" | "error" | "pending";
   timeout?: number | null;

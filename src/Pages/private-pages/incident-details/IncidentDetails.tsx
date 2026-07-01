@@ -9,15 +9,6 @@ import { useMessage } from "../../../Hooks/useMessage";
 export const IncidentDetails = () => {
   const { showMessage } = useMessage();
 
-  const showPos = async () => {
-    const position = await getLocation();
-    showMessage({
-      text: JSON.stringify(position),
-      status: "normal",
-      timeout: null,
-    });
-  };
-
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
       <SideBar active={"home"} classes="hidden sm:block" />
@@ -27,7 +18,7 @@ export const IncidentDetails = () => {
           "overflow-y-auto w-full",
         )}
       >
-        <Button onClick={() => showPos()}>Get Location</Button>
+        <Button onClick={() => getLocation(showMessage)}>Get Location</Button>
 
         <div className={cn("w-full")}>
           {/* ====== HEADER ====== */}
