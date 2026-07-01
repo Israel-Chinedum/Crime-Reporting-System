@@ -28,6 +28,7 @@ export const useLogin = () => {
       error && showMessage({ text: error, status: "error" });
 
       if (response) {
+        localStorage.setItem("refreshToken", response.refreshToken);
         navigate("/home");
         closeMessage();
       }

@@ -1,8 +1,60 @@
 export const useFetch = () => {
-  const baseUrl = "https://crime-reporting-system-server.onrender.com";
+  // const baseUrl = "https://crime-reporting-system-server.onrender.com";
+  const baseUrl = "http://localhost:3000";
 
+  const renewToken = async ({
+    fnc,
+    route,
+    data,
+    type,
+    form,
+  }: {
+    fnc: "GET" | "POST" | "MULTIPART";
+    route: string;
+    data?: any;
+    type?: any;
+    form?: any;
+  }) => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    let error: any;
+
+    try {
+      const res = await fetch(`${baseUrl}/auth`, {
+        headers: { Authorization: `Bearer ${refreshToken}` },
+      });
+
+      const response = await res.json();
+
+      if (!res.ok) {
+        if (res.status === 401 || res.status === 403) {
+          console.log("Please login again!");
+        } else {
+          throw new Error(response.message);
+        }
+      }
+
+      localStorage.setItem("accessToken", response.accessToken);
+
+      switch (fnc) {
+        case "GET":
+          return getRequest(route);
+        case "POST":
+          return postRequest({ data, route, type });
+        case "MULTIPART":
+          return multipartRequest({ form, route });
+      }
+    } catch (err: any) {
+      error = err.message;
+      return { error };
+    }
+  };
+  //
+  //
+  //
+  //
+  //
   //   ====== HANDLE GET REQUEST ======
-  const getRequest = async (route: string) => {
+  const getRequest: any = async (route: string) => {
     let response: any;
     let error: any;
     let statusCode: any;
@@ -13,12 +65,15 @@ export const useFetch = () => {
       });
 
       if (!res.ok) {
-        statusCode = res.status;
-        const err = await res.json();
-        if (typeof err.message === "string") {
-          throw new Error(err.message);
+        if (res.status === 401 || res.status === 403) {
+          return renewToken({ fnc: "GET", route });
+        } else {
+          const err = await res.json();
+          if (typeof err.message === "string") {
+            throw new Error(err.message);
+          }
+          throw new Error(err.message[0]);
         }
-        throw new Error(err.message[0]);
       }
 
       response = await res.json();
@@ -36,7 +91,7 @@ export const useFetch = () => {
   //
   //
   //   ====== HANDLE POST REQUEST ======
-  const postRequest = async ({
+  const postRequest: any = async ({
     data,
     route,
     type,
@@ -69,11 +124,15 @@ export const useFetch = () => {
       });
 
       if (!res.ok) {
-        const err = await res.json();
-        if (typeof err.message === "string") {
-          throw new Error(err.message);
+        if (res.status === 401 || res.status === 403) {
+          return renewToken({ fnc: "POST", route, data, type });
+        } else {
+          const err = await res.json();
+          if (typeof err.message === "string") {
+            throw new Error(err.message);
+          }
+          throw new Error(err.message[0]);
         }
-        throw new Error(err.message[0]);
       }
 
       response = await res.json();
@@ -91,7 +150,7 @@ export const useFetch = () => {
   //
   //
   //   ====== HANDLE MULTIPART/FORM-DATA REQUEST ======
-  const multipartRequest = async ({
+  const multipartRequest: any = async ({
     form,
     route,
   }: {
@@ -110,11 +169,15 @@ export const useFetch = () => {
       });
 
       if (!res.ok) {
-        const err = await res.json();
-        if (typeof err.message === "string") {
-          throw new Error(err.message);
+        if (res.status === 401 || res.status === 403) {
+          return renewToken({ fnc: "MULTIPART", route, form });
+        } else {
+          const err = await res.json();
+          if (typeof err.message === "string") {
+            throw new Error(err.message);
+          }
+          throw new Error(err.message[0]);
         }
-        throw new Error(err.message[0]);
       }
 
       response = await res.json();
