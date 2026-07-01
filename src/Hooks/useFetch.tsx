@@ -1,6 +1,6 @@
 export const useFetch = () => {
-  // const baseUrl = "https://crime-reporting-system-server.onrender.com";
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "https://crime-reporting-system-server.onrender.com";
+  // const baseUrl = "http://localhost:3000";
 
   const renewToken = async ({
     fnc,
