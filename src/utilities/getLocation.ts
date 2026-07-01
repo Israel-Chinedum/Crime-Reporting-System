@@ -2,7 +2,6 @@ import type { messageType } from "../Contexts/MessageContext";
 
 export const getLocation = (showMessage: (arg: messageType) => void) => {
   if ("geolocation" in navigator) {
-    let pos: string;
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const data = JSON.stringify({
@@ -20,12 +19,6 @@ export const getLocation = (showMessage: (arg: messageType) => void) => {
     // navigator.permissions
     //   .query({ name: "geolocation" })
     //   .then((result) => console.log("RESULT STATE: ", result.state));
-
-    return new Promise((resolve) => {
-      if (pos) {
-        return resolve(pos);
-      }
-    });
   } else {
     console.log("Geolocation not supported by this browser");
     return "Geolocation not supported by this browser";
