@@ -124,7 +124,10 @@ export const useFetch = () => {
       });
 
       if (!res.ok) {
-        if (res.status === 401 || res.status === 403) {
+        if (
+          res.status === 401 ||
+          (res.status === 403 && route !== "/user/signin")
+        ) {
           return renewToken({ fnc: "POST", route, data, type });
         } else {
           const err = await res.json();
