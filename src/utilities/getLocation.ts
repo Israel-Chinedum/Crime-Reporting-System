@@ -1,21 +1,24 @@
-import type { messageType } from "../Contexts/MessageContext";
-
-export const getLocation = (showMessage: (arg: messageType) => void) => {
+export const getLocation = () => {
   if ("geolocation" in navigator) {
+    let actualLocation: any;
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const data = JSON.stringify({
+        actualLocation({
           accuracy: position.coords.accuracy,
           lat: position.coords.latitude,
           long: position.coords.longitude,
         });
-        showMessage({ text: data, status: "normal", timeout: null });
       },
       (error) => {
         console.log("ERROR: ", error);
       },
       { timeout: 10000, maximumAge: 0 },
     );
+
+    return new Promise((resolve) => {
+      actualLocation = resolve;
+    });
     // navigator.permissions
     //   .query({ name: "geolocation" })
     //   .then((result) => console.log("RESULT STATE: ", result.state));

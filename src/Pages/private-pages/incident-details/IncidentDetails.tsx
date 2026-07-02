@@ -3,11 +3,11 @@ import { cn } from "../../../utilities/classNames";
 import { Stepper } from "../../../Components/Stepper";
 import { Button } from "../../../Components/Button";
 import { SideBar } from "../../../Components/SideBar";
-import { getLocation } from "../../../utilities/getLocation";
-import { useMessage } from "../../../Hooks/useMessage";
+import { useLocation } from "react-router-dom";
 
 export const IncidentDetails = () => {
-  const { showMessage } = useMessage();
+  // ====== SET LOCATION ON PAGE LOAD ======
+  useLocation();
 
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
@@ -18,8 +18,6 @@ export const IncidentDetails = () => {
           "overflow-y-auto w-full",
         )}
       >
-        <Button onClick={() => getLocation(showMessage)}>Get Location</Button>
-
         <div className={cn("w-full")}>
           {/* ====== HEADER ====== */}
           <InAppHeader content="Report a Crime" routeBack="/home" />
