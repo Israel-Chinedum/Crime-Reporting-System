@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { getLocation } from "../../../utilities/getLocation";
 
 export const useIncidentDetails = () => {
@@ -8,9 +8,7 @@ export const useIncidentDetails = () => {
     location.current = await getLocation();
   };
 
-  useEffect(() => {
-    setLocation();
-  }, []);
+  setLocation();
 
   return { location: location.current };
 };

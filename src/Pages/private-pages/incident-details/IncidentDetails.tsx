@@ -3,7 +3,7 @@ import { cn } from "../../../utilities/classNames";
 import { Stepper } from "../../../Components/Stepper";
 import { Button } from "../../../Components/Button";
 import { SideBar } from "../../../Components/SideBar";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "../../../Hooks/useLocation";
 
 export const IncidentDetails = () => {
   // ====== SET LOCATION ON PAGE LOAD ======
