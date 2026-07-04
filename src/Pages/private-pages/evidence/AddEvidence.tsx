@@ -4,12 +4,12 @@ import { Stepper } from "../../../Components/Stepper";
 import { Button } from "../../../Components/Button";
 import { SideBar } from "../../../Components/SideBar";
 import { useAddEvidence } from "./useAddEvidence";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useCamera } from "../../../Hooks/useCamera";
 import { FaCamera, FaMicrophone, FaPause, FaVideo } from "react-icons/fa";
 
 export const AddEvidence = () => {
-  const { setForm, form, evidenceMedia } = useAddEvidence();
+  const { form, evidenceMedia } = useAddEvidence();
 
   const {
     startMedia,
@@ -88,7 +88,7 @@ export const AddEvidence = () => {
               )}
               // ====== START MEDIA ======
               onClick={async () => {
-                const file = document.getElementById("evidence-file");
+                // const file = document.getElementById("evidence-file");
                 if (medium.type === "take-photo") {
                   setMediaType("photo");
                   await startMedia("camera");
