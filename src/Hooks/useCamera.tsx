@@ -65,7 +65,11 @@ export const useCamera = () => {
     const response = await fetch(dataUrl);
     const blob = await response.blob();
 
-    const file = new File([blob], `photo-evidence-${Date.now()}`, {
+    const _filename = `photo-evidence-${Date.now()}`;
+
+    setFilename(_filename);
+
+    const file = new File([blob], _filename, {
       type: blob.type,
     });
 
