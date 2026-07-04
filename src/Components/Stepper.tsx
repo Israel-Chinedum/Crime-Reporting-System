@@ -18,7 +18,7 @@ export const Stepper = ({
   }
 
   return (
-    <div className={cn("h-10 relative flex justify-between")}>
+    <div className={cn("h-10 relative flex justify-between shrink-0")}>
       {/* ====== line ====== */}
       <div
         className={cn(
