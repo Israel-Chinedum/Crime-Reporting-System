@@ -1,14 +1,14 @@
 import { useRef } from "react";
-import { getLocation } from "../../../utilities/getLocation";
+import { useReport } from "../../../Hooks/useReport";
 
 export const useIncidentDetails = () => {
-  const location = useRef<unknown>(null);
+  const { setFormData } = useReport();
 
-  const setLocation = async () => {
-    location.current = await getLocation();
+  const form = useRef<HTMLFormElement>(null);
+
+  const setForm = () => {
+    form.current && setFormData(form.current);
   };
 
-  setLocation();
-
-  return { location: location.current };
+  return { setForm, form };
 };

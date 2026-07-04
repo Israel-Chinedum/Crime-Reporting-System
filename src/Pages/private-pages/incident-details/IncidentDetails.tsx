@@ -4,10 +4,15 @@ import { Stepper } from "../../../Components/Stepper";
 import { Button } from "../../../Components/Button";
 import { SideBar } from "../../../Components/SideBar";
 import { useLocation } from "../../../Hooks/useLocation";
+import { useIncidentDetails } from "./useIncidentDetails";
+import { useNavigate } from "react-router-dom";
 
 export const IncidentDetails = () => {
   // ====== SET LOCATION ON PAGE LOAD ======
   useLocation();
+
+  const navigate = useNavigate();
+  const { setForm, form } = useIncidentDetails();
 
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
@@ -36,13 +41,13 @@ export const IncidentDetails = () => {
           {/* ====== INCIDENT DETAILS ====== */}
           <h1 className={cn("font-bold mt-10 text-xl")}>1. Incident Details</h1>
 
-          <form action="" className={cn("mt-8 flex flex-col gap-7")}>
+          <form ref={form} action="" className={cn("mt-8 flex flex-col gap-7")}>
             {/* ====== TYPE OF INCIDENT ====== */}
             <div className={cn("flex flex-col gap-2")}>
               <label htmlFor="type of incident">Type of incident</label>
 
               <select
-                name="type-of-incident"
+                name="incident_type"
                 id=""
                 className={cn(
                   "bg-deep p-4 rounded-md outline-none appearance-none",
@@ -70,7 +75,7 @@ export const IncidentDetails = () => {
             <div className={cn("flex flex-col gap-2")}>
               <label htmlFor="incident location">Incident Location</label>
               <select
-                name="type-of-incident"
+                name="location"
                 id=""
                 className={cn(
                   "bg-deep p-4 rounded-md outline-none appearance-none",
@@ -108,20 +113,41 @@ export const IncidentDetails = () => {
               <div className={cn("flex gap-2")}>
                 <div>
                   <input
+                    name="date"
                     type="date"
                     className={cn("bg-deep p-2 rounded-md ")}
                   />
                   <p className={cn("text-gray-500 text-[14px]")}>Date</p>
                 </div>
                 <div>
-                  <input type="time" className={cn("bg-deep p-2 rounded-md")} />
+                  <input
+                    name="time"
+                    type="time"
+                    className={cn("bg-deep p-2 rounded-md")}
+                  />
                   <p className={cn("text-gray-500 text-[14px]")}>Time</p>
                 </div>
               </div>
             </div>
 
+            {/* ====== HIDDEN INPUTS ====== */}
+            <input
+              className={cn("hidden")}
+              name="type"
+              type="text"
+              value={"active"}
+            />
+
             {/* ====== NEXT BUTTON ====== */}
-            <Button classes="w-full mobile:w-60">Next</Button>
+            <Button
+              onClick={() => {
+                setForm();
+                navigate("/evidence");
+              }}
+              classes="w-full mobile:w-60"
+            >
+              Next
+            </Button>
           </form>
         </div>
       </section>

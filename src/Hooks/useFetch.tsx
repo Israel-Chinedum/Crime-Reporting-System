@@ -41,7 +41,7 @@ export const useFetch = () => {
         case "POST":
           return postRequest({ data, route, type });
         case "MULTIPART":
-          return multipartRequest({ form, route });
+          return multipartRequest({ form, route, type });
       }
     } catch (err: any) {
       error = err.message;
@@ -156,24 +156,28 @@ export const useFetch = () => {
   const multipartRequest: any = async ({
     form,
     route,
+    type,
   }: {
     form: HTMLFormElement;
     route: string;
+    type: "formElement" | "formData";
   }) => {
     let response: any;
     let error: any;
-    const formData = new FormData(form);
+    let formData: any;
+
+    type === "formElement" && (formData = new FormData(form));
 
     try {
       const res = await fetch(`${baseUrl}${route}`, {
         method: "POST",
         credentials: "include",
-        body: formData,
+        body: type === "formData" ? form : formData,
       });
 
       if (!res.ok) {
         if (res.status === 401 || res.status === 403) {
-          return renewToken({ fnc: "MULTIPART", route, form });
+          return renewToken({ fnc: "MULTIPART", route, form, type });
         } else {
           const err = await res.json();
           if (typeof err.message === "string") {
