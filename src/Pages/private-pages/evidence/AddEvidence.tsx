@@ -49,18 +49,20 @@ export const AddEvidence = () => {
           "w-full",
         )}
       >
-        {/* ====== HEADER ====== */}
-        <InAppHeader content="Report a Crime" routeBack="/incident-details" />
+        <div className={cn("w-full")}>
+          {/* ====== HEADER ====== */}
+          <InAppHeader content="Report a Crime" routeBack="/incident-details" />
 
-        {/* ====== SEPARATOR ====== */}
-        <div className={cn("my-8")}></div>
+          {/* ====== SEPARATOR ====== */}
+          <div className={cn("my-8")}></div>
 
-        {/* ====== STEPPER ====== */}
-        <Stepper
-          progressIndex={2}
-          bgColor="bg-navy"
-          progressColor="bg-blue-600"
-        />
+          {/* ====== STEPPER ====== */}
+          <Stepper
+            progressIndex={2}
+            bgColor="bg-navy"
+            progressColor="bg-blue-600"
+          />
+        </div>
 
         {/* ====== ADD EVIDENCE ====== */}
         <h1 className={cn("font-bold mt-10 text-xl")}>
