@@ -128,6 +128,7 @@ export const AddEvidence = () => {
               <video
                 autoPlay
                 playsInline
+                muted
                 ref={videoRef}
                 className={cn("w-full h-full")}
               ></video>
