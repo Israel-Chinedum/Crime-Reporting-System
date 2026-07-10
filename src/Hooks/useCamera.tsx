@@ -7,15 +7,21 @@ export const useCamera = () => {
   const chunksRef = useRef<Blob[]>([]);
 
   const [image, setImage] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [audioFile, setAudioFile] = useState<File | null>(null);
   const [filename, setFilename] = useState("No evidence has been uploaded");
 
-  //  ====== START CAMERA ======
-  const startMedia = async (media: "camera" | "mic") => {
+  const setFilesToDefault = () => {
     setImage(null);
+    setImageFile(null);
     setVideoFile(null);
     setAudioFile(null);
+  };
+
+  //  ====== START CAMERA ======
+  const startMedia = async (media: "camera" | "mic") => {
+    setFilesToDefault();
     const stream = await navigator.mediaDevices.getUserMedia({
       video: media === "camera",
       audio: true,
@@ -73,7 +79,7 @@ export const useCamera = () => {
       type: blob.type,
     });
 
-    return file;
+    setImageFile(file);
   };
 
   //   ====== START RECORDING ======
@@ -107,7 +113,6 @@ export const useCamera = () => {
       });
 
       media === "video" ? setVideoFile(file) : setAudioFile(file);
-      console.log(audioFile);
     };
     recorder.start();
   };
@@ -128,6 +133,12 @@ export const useCamera = () => {
     startRecording,
     videoFile,
     audioFile,
+    imageFile,
     filename,
+    setFilename,
+    setFilesToDefault,
+    setAudioFile,
+    setVideoFile,
+    setImageFile,
   };
 };

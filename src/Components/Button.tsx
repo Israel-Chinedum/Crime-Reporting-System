@@ -1,14 +1,16 @@
-import type { MouseEventHandler, ReactNode } from "react";
+import type { MouseEventHandler, ReactNode, SubmitEventHandler } from "react";
 import { cn } from "../utilities/classNames";
 
 export const Button = ({
   children,
   classes = "",
   onClick,
+  onSubmit,
 }: {
   children: ReactNode;
   classes?: string;
   onClick?: MouseEventHandler;
+  onSubmit?: SubmitEventHandler;
 }) => {
   return (
     <button
@@ -22,6 +24,7 @@ export const Button = ({
         classes,
       )}
       onClick={onClick}
+      onSubmit={onSubmit}
     >
       {children}
     </button>

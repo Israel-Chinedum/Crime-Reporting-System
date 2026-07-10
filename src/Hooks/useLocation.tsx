@@ -1,17 +1,19 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { getLocation } from "../utilities/getLocation";
 
 export const useLocation = () => {
-  const location = useRef<unknown>(null);
+  const location = useRef<any>(null);
 
   const setLocation = async () => {
-    location.current = await getLocation();
-    console.log(location.current);
+    try {
+      const userLocation = await getLocation();
+      location.current = userLocation;
+      return userLocation;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   };
 
-  useEffect(() => {
-    setLocation();
-  }, []);
-
-  return { location: location.current };
+  return { location, setLocation };
 };

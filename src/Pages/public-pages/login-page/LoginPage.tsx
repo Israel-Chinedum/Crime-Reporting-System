@@ -6,10 +6,12 @@ import { FaArrowLeft } from "react-icons/fa";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
-  const { username, password, postFormData } = useLogin();
+  const { username, password, postFormData, loadAnimation, runLoadAnimation } =
+    useLogin();
 
   return (
     <section className={cn(" h-dvh text-custom-white flex flex-col")}>
+      {loadAnimation.state && runLoadAnimation()}
       <Button
         onClick={() => navigate("/")}
         classes="bg-custom-blue w-max px-4 m-2 text-[16px]"

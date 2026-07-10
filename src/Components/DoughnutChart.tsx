@@ -4,7 +4,7 @@ export const DoughnutChart = () => {
   const data = [
     {
       name: "Active",
-      value: 36,
+      value: 36 ,
       fill: "#f39c12",
     },
     {

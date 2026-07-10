@@ -2,7 +2,8 @@ import { useRef } from "react";
 import { useReport } from "../../../Hooks/useReport";
 
 export const useIncidentDetails = () => {
-  const { setFormData } = useReport();
+  const { setFormData, getReportData } = useReport();
+  const reportData = getReportData();
 
   const form = useRef<HTMLFormElement>(null);
 
@@ -10,5 +11,5 @@ export const useIncidentDetails = () => {
     form.current && setFormData(form.current);
   };
 
-  return { setForm, form };
+  return { setForm, form, reportData };
 };

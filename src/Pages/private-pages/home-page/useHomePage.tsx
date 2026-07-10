@@ -14,7 +14,7 @@ export const useHomePage = () => {
   const quickActions: quicActions[] = [
     {
       name: "Report a Crime",
-      description: "Report iincidents anonymously",
+      description: "Report incidents anonymously",
       icon: <HiDocumentReport />,
     },
 

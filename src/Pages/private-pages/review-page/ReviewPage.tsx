@@ -3,8 +3,12 @@ import { Stepper } from "../../../Components/Stepper";
 import { cn } from "../../../utilities/classNames";
 import { Button } from "../../../Components/Button";
 import { SideBar } from "../../../Components/SideBar";
+import { useReport } from "../../../Hooks/useReport";
 
 export const ReviewPage = () => {
+  const { getReportData } = useReport();
+  const reportData = getReportData();
+
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
       <SideBar active={"home"} classes="hidden sm:block" />
@@ -34,13 +38,13 @@ export const ReviewPage = () => {
               <p className={cn("text-[14px] text-gray-400 mb-4")}>
                 Incident Type
               </p>
-              <h2>Robbery</h2>
+              <h2>{reportData.incident_type}</h2>
             </div>
 
             {/* location */}
             <div className={cn("border-b border-b-gray-700 p-3")}>
               <p className={cn("text-[14px] text-gray-400 mb-4")}>Location</p>
-              <h2>Shool Gate</h2>
+              <h2>{reportData.location}</h2>
             </div>
 
             {/* date and time */}
@@ -49,8 +53,8 @@ export const ReviewPage = () => {
                 Date & Time
               </p>
               <div>
-                <h2>May 21, 2024</h2>
-                <h2>10:30 AM</h2>
+                <h2>{reportData.date}</h2>
+                <h2>{reportData.time}</h2>
               </div>
             </div>
 
@@ -59,18 +63,60 @@ export const ReviewPage = () => {
               <p className={cn("text-[14px] text-gray-400 mb-4")}>
                 Description
               </p>
-              <h2>
-                A group of ment robbed a student at gunpoint near the school
-                gate.
-              </h2>
+              <h2>{reportData.description}</h2>
             </div>
 
             {/* evidence */}
             <div className={cn(" p-3")}>
-              <p className={cn("text-[14px] text-gray-400 mb-4")}>
-                Evidence (1)
-              </p>
-              <div className={cn("p-4 bg-navy rounded-md")}></div>
+              <p className={cn("text-[14px] text-gray-400 mb-4")}>Evidence</p>
+              <div
+                className={cn(
+                  "p-4 bg-navy rounded-md max-w-120 max-h-100",
+                  "overflow-hidden",
+                )}
+              >
+                {(() => {
+                  if (reportData.evidence_provided === "true") {
+                    const file = reportData.file;
+                    if (file.type.includes("image")) {
+                      return (
+                        <div className={cn("w-120 h-100 overflow-hidden")}>
+                          <img
+                            className={cn("max-w-full h-[90%]")}
+                            src={URL.createObjectURL(file)}
+                            alt=""
+                          />
+                          <p>{file.name}</p>
+                        </div>
+                      );
+                    }
+                    if (file.type.includes("video")) {
+                      return (
+                        <>
+                          <video
+                            src={URL.createObjectURL(file)}
+                            controls
+                          ></video>
+                          <p>{file.name}</p>
+                        </>
+                      );
+                    }
+                    if (file.type.includes("audio")) {
+                      return (
+                        <>
+                          <audio
+                            src={URL.createObjectURL(file)}
+                            controls
+                          ></audio>
+                          <p>{file.name}</p>
+                        </>
+                      );
+                    }
+                  } else {
+                    return <p>No evidence provided</p>;
+                  }
+                })()}
+              </div>
             </div>
           </form>
 

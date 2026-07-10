@@ -43,13 +43,22 @@ export const useAddEvidence = () => {
     },
   ];
 
-  const { setFormData } = useReport();
+  const { addFile, getReportData, removeFile } = useReport();
 
-  const form = useRef<HTMLFormElement>(null);
+  const reportData = getReportData();
 
-  const setForm = () => {
-    form.current && setFormData(form.current);
+  const file = useRef<HTMLInputElement>(null);
+
+  const setFile = (paramFile?: File) => {
+    if (paramFile) {
+      addFile(paramFile);
+      return true;
+    } else if (file.current?.value && file.current.files) {
+      addFile(file.current.files[0]);
+      return true;
+    }
+    return false;
   };
 
-  return { setForm, form, evidenceMedia };
+  return { setFile, file, evidenceMedia, reportData, removeFile };
 };

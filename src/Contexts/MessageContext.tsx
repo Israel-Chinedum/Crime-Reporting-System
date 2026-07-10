@@ -57,8 +57,8 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
         <div
           className={cn(
             "rounded-xl p-3 w-max max-w-[80dvw] absolute bg-deep",
-            "left-[50%] translate-x-[-50%] top-[3dvh] lg:text-[1.2rem]",
-            "flex items-center gap-1 z-50! text-center",
+            "left-[50%] translate-x-[-50%] top-[3dvh] 2xl:text-[1.2rem]",
+            "flex items-center gap-1 z-50! wrap-break-word text-center",
             // condition for vertical message position
             message.pos_y === "top" && "top-[3dvh]",
             message.pos_y === "mid" && "top-[50dvh] translate-y-[-50%]",

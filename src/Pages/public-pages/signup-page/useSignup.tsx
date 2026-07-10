@@ -49,7 +49,7 @@ export const useSignup = () => {
               text: response.message,
               status: "success",
               pos_y: "mid",
-            });
+             });
             showMessage({
               text: "Redirecting to login page",
               status: "pending",

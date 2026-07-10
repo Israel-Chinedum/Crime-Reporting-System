@@ -1,5 +1,13 @@
-export const getLocation = () => {
+export const getLocation = async () => {
   if ("geolocation" in navigator) {
+    const permission = await navigator.permissions.query({
+      name: "geolocation",
+    });
+
+    if (permission.state === "denied") {
+      return "Location access has been blocked. Please enable location permissions in your browser settings.";
+    }
+
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -14,8 +22,13 @@ export const getLocation = () => {
             error.code === error.PERMISSION_DENIED ||
             error.code === error.POSITION_UNAVAILABLE
           ) {
-            reject({ message: "Permission denied or position unavailable!" });
-          } else reject({ message: "Failed to get user location!" });
+            reject(
+              "Permission denied or position unavailable! Ensure location access is not blocked in browser settings!",
+            );
+          } else
+            reject(
+              "Failed to get user location! Ensure location access is not blocked in browser settings!",
+            );
         },
         { timeout: 10000, maximumAge: 0 },
       );

@@ -3,13 +3,21 @@ import { useHomePage } from "./useHomePage";
 import { cn } from "../../../utilities/classNames";
 import { SideBar } from "../../../Components/SideBar";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "../../../Hooks/useLocation";
+import { useMessage } from "../../../Hooks/useMessage";
+import { useLoadAnimation } from "../../../Hooks/useLoadAnimation";
 
 export const HomePage = () => {
-  const { quickActions } = useHomePage();
   const navigate = useNavigate();
+  const { quickActions } = useHomePage();
+  const { showMessage } = useMessage();
+  const { setLocation } = useLocation();
+  const { loadAnimation, setLoadAnimation, runLoadAnimation } =
+    useLoadAnimation();
 
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
+      {loadAnimation.state && runLoadAnimation()}
       <SideBar active={"home"} />
       <section
         id="home-page"
@@ -29,7 +37,7 @@ export const HomePage = () => {
           <div
             className={cn(
               "flex items-center gap-3 bg-accent text-custom-white",
-              "rounded-md px-4 py-5 mt-5",
+              "rounded-md px-4 py-5 mt-5 cursor-default",
               //   mobile and above
               "mobile:max-w-[320px]",
             )}
@@ -59,9 +67,21 @@ export const HomePage = () => {
                 "bg-deep px-2 py-4 rounded-md flex flex-col",
                 "items-center gap-2 cursor-default",
               )}
-              onClick={() => {
-                action.name === "Report a Crime" &&
-                  navigate("/incident-details");
+              onClick={async () => {
+                if (action.name === "Report a Crime") {
+                  setLoadAnimation({ state: true });
+                  const location = await setLocation();
+                  setLoadAnimation({ state: false });
+                  if (typeof location === "string") {
+                    showMessage({
+                      text: location,
+                      status: "warning",
+                      timeout: 7000,
+                    });
+                  } else {
+                    navigate("/incident-details");
+                  }
+                }
               }}
             >
               <span className={cn("text-4xl text-custom-green")}>
