@@ -1,13 +1,12 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { LoginPage } from "../Pages/public-pages/login-page/LoginPage";
 
 export const UserGuard = () => {
-  const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem("userData")!);
 
-  const { access, role } = JSON.parse(localStorage.getItem("userData")!);
-
-  if (access !== "granted") {
-    navigate("/login");
+  if (!userData || userData.access !== "granted" || userData.role !== "user") {
+    return <LoginPage />;
+  } else {
+    return <Outlet />;
   }
-
-  return <>{access === "granted" && role === "user" && <Outlet />}</>;
 };

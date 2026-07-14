@@ -1,6 +1,12 @@
+import { useNavigate } from "react-router-dom";
+import { useMessage } from "./useMessage";
+
 export const useFetch = () => {
   // const baseUrl = "https://crime-reporting-system-server.onrender.com";
   const baseUrl = "http://localhost:3000";
+
+  const { showMessage } = useMessage();
+  const navigate = useNavigate();
 
   const renewToken = async ({
     fnc,
@@ -15,25 +21,32 @@ export const useFetch = () => {
     type?: any;
     form?: any;
   }) => {
-    const refreshToken = localStorage.getItem("refreshToken");
+    const userData = JSON.parse(localStorage.getItem("userData")!);
+
     let error: any;
 
     try {
       const res = await fetch(`${baseUrl}/auth`, {
-        headers: { Authorization: `Bearer ${refreshToken}` },
+        headers: { Authorization: `Bearer ${userData.refreshToken}` },
       });
 
       const response = await res.json();
 
       if (!res.ok) {
         if (res.status === 401 || res.status === 403) {
-          console.log("Please login again!");
+          showMessage({
+            text: "User session expired!",
+            status: "warning",
+          });
+          navigate("/login");
+          return;
         } else {
           throw new Error(response.message);
         }
       }
 
-      localStorage.setItem("accessToken", response.accessToken);
+      userData["accessToken"] = response.accessToken;
+      localStorage.setItem("userData", JSON.stringify(userData));
 
       switch (fnc) {
         case "GET":
@@ -59,8 +72,11 @@ export const useFetch = () => {
     let error: any;
     let statusCode: any;
 
+    const { accessToken } = JSON.parse(localStorage.getItem("userData")!);
+
     try {
       const res: Response = await fetch(`${baseUrl}${route}`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
         credentials: "include",
       });
 
@@ -115,9 +131,19 @@ export const useFetch = () => {
       customData = JSON.stringify(customData);
     }
 
+    let accessToken = "";
+    if (route !== "/signin") {
+      const userData = JSON.parse(localStorage.getItem("userData")!);
+      accessToken = userData;
+    }
+
     try {
       const res = await fetch(`${baseUrl}${route}`, {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+
         credentials: "include",
         method: "POST",
         body: customData,
@@ -168,8 +194,11 @@ export const useFetch = () => {
 
     type === "formElement" && (formData = new FormData(form));
 
+    const { accessToken } = JSON.parse(localStorage.getItem("userData")!);
+
     try {
       const res = await fetch(`${baseUrl}${route}`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
         method: "POST",
         credentials: "include",
         body: type === "formData" ? form : formData,
@@ -177,6 +206,7 @@ export const useFetch = () => {
 
       if (!res.ok) {
         if (res.status === 401 || res.status === 403) {
+          console.log("I ran");
           return renewToken({ fnc: "MULTIPART", route, form, type });
         } else {
           const err = await res.json();

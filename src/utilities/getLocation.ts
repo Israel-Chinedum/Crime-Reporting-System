@@ -14,7 +14,7 @@ export const getLocation = async () => {
           resolve({
             accuracy: position.coords.accuracy,
             lat: position.coords.latitude,
-            long: position.coords.longitude,
+            lng: position.coords.longitude,
           });
         },
         (error) => {
@@ -34,7 +34,7 @@ export const getLocation = async () => {
       );
     });
   } else {
-    console.log("Geolocation not supported by this browser");
-    return "Geolocation not supported by this browser";
+    console.log("Geolocation is not supported by this browser");
+    return "Geolocation is not supported by this browser";
   }
 };

@@ -16,7 +16,7 @@ export const useLoadAnimation = () => {
         className={cn(
           "absolute w-dvw h-dvh bg-black/50",
           "flex justify-center items-center gap-2",
-          "z-50",
+          "z-50 text-white",
         )}
       >
         <div

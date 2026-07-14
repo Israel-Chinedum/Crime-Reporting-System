@@ -5,6 +5,7 @@ export const ReportContext = createContext<{
   addFile: (arg: File) => void;
   getReportData: () => any;
   removeFile: () => void;
+  formData: FormData;
 } | null>(null);
 
 export const ReportProvider = ({ children }: { children: ReactNode }) => {
@@ -46,6 +47,7 @@ export const ReportProvider = ({ children }: { children: ReactNode }) => {
         addFile,
         getReportData,
         removeFile,
+        formData: formData.current,
       }}
     >
       {children}

@@ -2,8 +2,12 @@ import { Button } from "../../../Components/Button";
 import { cn } from "../../../utilities/classNames";
 import { FaCheck } from "react-icons/fa";
 import { SideBar } from "../../../Components/SideBar";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const ReportStatus = () => {
+  const { reportId } = useParams();
+  const navigate = useNavigate();
+
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
       <SideBar active={"home"} classes="hidden sm:block" />
@@ -29,7 +33,7 @@ export const ReportStatus = () => {
 
         <div className={cn("bg-deep p-2 rounded-md mt-10 w-full mobile:w-100")}>
           <h2 className={cn("text-[14px] text-gray-400")}>Report ID</h2>
-          <h1 className={cn("mt-3 font-bold text-xl")}>CR-2024-05-21-007</h1>
+          <h1 className={cn("mt-3 font-bold text-xl")}>{reportId}</h1>
         </div>
 
         <h2 className={cn("mt-5")}>You will be notified about updates.</h2>
@@ -40,7 +44,10 @@ export const ReportStatus = () => {
           )}
         >
           <Button classes="text-[16px] w-full mobile:w-60">Track Report</Button>
-          <Button classes="text-[16px] bg-custom-blue w-full mobile:w-60">
+          <Button
+            onClick={() => navigate("/home")}
+            classes="text-[16px] bg-custom-blue w-full mobile:w-60"
+          >
             Back to Home
           </Button>
         </div>

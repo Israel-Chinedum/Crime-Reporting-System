@@ -30,7 +30,7 @@ export const PrivateRoutes = () => {
         <Route path="/review" element={<ReviewPage />} />
 
         {/* ====== REPORT STATUS PAGE ====== */}
-        <Route path="/report-status" element={<ReportStatus />} />
+        <Route path="/report-status/:reportId" element={<ReportStatus />} />
 
         {/* ====== ALERTS PAGE ====== */}
         <Route path="/alerts" element={<AlertsPage />} />

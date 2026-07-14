@@ -4,13 +4,17 @@ import { cn } from "../../../utilities/classNames";
 import { Button } from "../../../Components/Button";
 import { SideBar } from "../../../Components/SideBar";
 import { useReport } from "../../../Hooks/useReport";
+import { useReviewPage } from "./useReviewPage";
 
 export const ReviewPage = () => {
   const { getReportData } = useReport();
   const reportData = getReportData();
+  const { loadAnimation, runLoadAnimation, sendReport, anonymous } =
+    useReviewPage();
 
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
+      {loadAnimation.state && runLoadAnimation()}
       <SideBar active={"home"} classes="hidden sm:block" />
       <section
         className={cn(
@@ -122,11 +126,23 @@ export const ReviewPage = () => {
 
           {/* ====== CHECK IF USER WANTS TO REPORT ANONYMOUSLY ====== */}
           <div className={cn("flex gap-2 mt-5 mb-10")}>
-            <input type="checkbox" className={cn("w-5 ")} />
+            <input
+              type="checkbox"
+              onChange={(e) => {
+                if (e.target.checked) {
+                  anonymous.current = true;
+                } else {
+                  anonymous.current = false;
+                }
+              }}
+              className={cn("w-5 ")}
+            />
             <p>Report anonymously</p>
           </div>
 
-          <Button classes="w-full mobile:w-60">Submit Report</Button>
+          <Button classes="w-full mobile:w-60" onClick={() => sendReport()}>
+            Submit Report
+          </Button>
         </div>
       </section>
     </div>
