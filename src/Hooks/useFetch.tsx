@@ -2,8 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useMessage } from "./useMessage";
 
 export const useFetch = () => {
-  // const baseUrl = "https://crime-reporting-system-server.onrender.com";
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = import.meta.env.PROD
+    ? "https://crime-reporting-system-server.onrender.com"
+    : "http://localhost:3000";
 
   const { showMessage } = useMessage();
   const navigate = useNavigate();
