@@ -13,7 +13,7 @@ export const useNotificationsPage = () => {
         showMessage({ text: response.error, status: "error" });
         return;
       }
-
+      console.log("RESPONSE:", response);
       setNotifications(response);
     });
   };
@@ -28,7 +28,7 @@ export const useNotificationsPage = () => {
     return () => {
       socket.off("notification");
     };
-  });
+  }, []);
 
   return { notifications };
 };
