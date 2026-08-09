@@ -1,21 +1,39 @@
-import { useState } from "react";
 import { AdminSideBar } from "../../../../Components/AdminSideBar";
 import { cn } from "../../../../utilities/classNames";
-import { FaEye } from "react-icons/fa";
 import { MdMoreVert } from "react-icons/md";
+import { useAdminReports } from "./useAdminReports";
+import { FaEye } from "react-icons/fa";
+import { useReportBox } from "../../../../Components/ReportBox";
+import { useState } from "react";
 
 export const AdminReportsPage = () => {
-  const [display, setDisplay] = useState(false);
+  const { reports, toggleActVisibility, updateReport, getSrc } =
+    useAdminReports({});
+  const { showBox, setShowBox, runShowBox, setSrc } = useReportBox({});
+  const [reportData, setReportData] = useState<any>(null);
 
   return (
-    <div
-      className={cn("flex h-dvh")}
-      onClick={() => {
-        display && setDisplay(false);
-      }}
-    >
+    <div className={cn("flex h-dvh relative")}>
       <AdminSideBar active="reports" />
-      <section className={cn("text-custom-white p-3 overflow-y-auto w-full")}>
+      <section
+        className={cn(
+          "text-custom-white p-3 overflow-y-auto w-full select-none",
+        )}
+      >
+        {showBox &&
+          runShowBox({
+            reportId: reportData?.reportId,
+            incident_type: reportData?.incident_type,
+            date: reportData?.date,
+            time: reportData?.time,
+            location: reportData?.location,
+            actual_location: reportData?.actual_location,
+            description: reportData?.description,
+            reported_by: reportData?.reported_by,
+            evidence_provided: reportData?.evidence_provided,
+            fileMetaData: reportData?.fileMetaData,
+            updateReport,
+          })}
         <h1 className={cn("mt-5 mb-10")}>Reports</h1>
 
         <table className={cn("w-full")}>
@@ -34,74 +52,111 @@ export const AdminReportsPage = () => {
           {/* ====== table body ====== */}
           <tbody>
             {/* TR */}
-            <tr className={cn("border-b border-gray-600")}>
-              {/* ====== Report id ====== */}
-              <td className={cn("p-4")}>CR-2026-05-21-0007</td>
-              {/* ====== Type ====== */}
-              <td className={cn("p-4")}>Robbery</td>
-              {/* ====== Location ====== */}
-              <td className={cn("p-4")}>School Gate</td>
-              {/* ====== Status ====== */}
-              <td className={cn("p-4")}>
-                <p
-                  className={cn(
-                    "bg-green-300 w-max px-2 rounded-full text-green-600 font-bold",
-                  )}
+            {typeof reports !== "string" &&
+              reports.map((report: any) => (
+                <tr
+                  key={report.reportId}
+                  className={cn("border-b border-gray-600")}
                 >
-                  In Progress
-                </p>
-              </td>
-
-              {/* ====== Reported by ====== */}
-              <td className={cn("p-4")}>Anonymous</td>
-
-              {/* ====== Time ====== */}
-              <td className={cn("p-4")}>10:36 AM</td>
-
-              {/* ====== Actions ====== */}
-              <td className={cn("flex gap-2 text-2xl items-center p-4")}>
-                <FaEye className={cn("cursor-pointer hover:text-blue-600")} />
-                <div className={cn("relative")}>
-                  <MdMoreVert
-                    className={cn("cursor-pointer hover:text-blue-600")}
-                    onClick={() => {
-                      display ? setDisplay(false) : setDisplay(true);
-                    }}
-                  />
-                  <ul
-                    className={cn(
-                      "text-[16px] bg-deep rounded-md absolute",
-                      "w-max top-[120%] left-[-150%] overflow-hidden",
-                      display ? "block" : "hidden",
-                    )}
-                  >
-                    <li
+                  {/* ====== Report id ====== */}
+                  <td className={cn("p-4")}>{report.reportId}</td>
+                  {/* ====== Type ====== */}
+                  <td className={cn("p-4")}>{report.incident_type}</td>
+                  {/* ====== Location ====== */}
+                  <td className={cn("p-4")}>{report.location}</td>
+                  {/* ====== Status ====== */}
+                  <td className={cn("p-4")}>
+                    <p
                       className={cn(
-                        "py-2 px-3 cursor-pointer hover:bg-blue-600",
-                        "border-b border-gray-700",
+                        "bg-green-300/20 w-max px-2 rounded-full text-green-600 font-bold",
+                        report.status === "active" &&
+                          "bg-custom-orange/20 text-custom-orange",
                       )}
                     >
-                      Resolve
-                    </li>
-                    <li
+                      {report.status}
+                    </p>
+                  </td>
+
+                  {/* ====== Reported by ====== */}
+                  <td className={cn("p-4")}>{report.reported_by}</td>
+
+                  {/* ====== Time ====== */}
+                  <td className={cn("p-4")}>{report.time}</td>
+
+                  {/* ====== Actions ====== */}
+                  <td className={cn("flex gap-2 text-2xl items-center p-4")}>
+                    <FaEye
                       className={cn(
-                        "py-2 px-3 cursor-pointer hover:bg-blue-600",
-                        "border-b border-gray-700",
+                        "cursor-pointer hover:text-blue-600 text-xl",
                       )}
-                    >
-                      In progress
-                    </li>
-                    <li
-                      className={cn(
-                        "py-2 px-3 cursor-pointer hover:bg-blue-600",
-                      )}
-                    >
-                      Delete
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
+                      onClick={async () => {
+                        setReportData(report);
+                        setShowBox(true);
+                        const src: string = await getSrc(report.reportId);
+                        setSrc(src);
+                      }}
+                    />
+                    <div className={cn("relative all-reports-action-div")}>
+                      <MdMoreVert
+                        className={cn("cursor-pointer hover:text-blue-600")}
+                        onClick={toggleActVisibility}
+                      />
+                      <ul
+                        className={cn(
+                          "text-[16px] bg-deep rounded-md absolute z-10",
+                          "w-max top-[120%] left-[-150%] overflow-hidden hidden",
+                        )}
+                      >
+                        <li
+                          className={cn(
+                            "py-2 px-3 cursor-pointer hover:bg-blue-600",
+                            "border-b border-gray-700",
+                          )}
+                          onClick={() => {
+                            updateReport({
+                              message: "You are about to resolve this case!",
+                              action: "resolved",
+                              reportId: report.reportId,
+                            });
+                          }}
+                        >
+                          Resolve
+                        </li>
+                        <li
+                          className={cn(
+                            "py-2 px-3 cursor-pointer border-b hover:bg-blue-600",
+                            "border-gray-700",
+                          )}
+                          onClick={() => {
+                            updateReport({
+                              message: "You are about to activate this case!",
+                              action: "active",
+                              reportId: report.reportId,
+                            });
+                          }}
+                        >
+                          Active
+                        </li>
+                        <li
+                          className={cn(
+                            "py-2 px-3 cursor-pointer hover:bg-blue-600",
+                            "border-gray-700",
+                          )}
+                          onClick={() => {
+                            updateReport({
+                              message: "You are about to delete this report!",
+                              action: "delete",
+                              reportId: report.reportId,
+                            });
+                          }}
+                        >
+                          Delete
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </section>

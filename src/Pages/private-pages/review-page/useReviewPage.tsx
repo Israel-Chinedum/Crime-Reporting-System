@@ -6,9 +6,11 @@ import { useReport } from "../../../Hooks/useReport";
 import { useMessage } from "../../../Hooks/useMessage";
 import { useNavigate } from "react-router-dom";
 import { formatTime } from "../../../utilities/formatTime";
+import { useSocket } from "../../../Hooks/useSocket";
 
 export const useReviewPage = () => {
   const { setLocation } = useLocation();
+  const socket = useSocket();
   const { formData, getReportData } = useReport();
   const { multipartRequest } = useFetch();
   const { loadAnimation, setLoadAnimation, runLoadAnimation } =
@@ -64,6 +66,7 @@ export const useReviewPage = () => {
     if (response) {
       setLoadAnimation({ state: false });
       navigate(`/report-status/${response.message}`);
+      socket.emit("report-sent", { reportId: response.message });
     }
   };
 

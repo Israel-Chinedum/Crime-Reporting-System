@@ -1,8 +1,13 @@
-import type { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { HiDocumentReport } from "react-icons/hi";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdHealthAndSafety } from "react-icons/md";
 import { FaRoute } from "react-icons/fa";
+import { useLoadAnimation } from "../../../Hooks/useLoadAnimation";
+import { useLocation } from "../../../Hooks/useLocation";
+import { useMessage } from "../../../Hooks/useMessage";
+import { useFetch } from "../../../Hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 
 type quicActions = {
   name: string;
@@ -11,6 +16,13 @@ type quicActions = {
 };
 
 export const useHomePage = () => {
+  const navigate = useNavigate();
+  const { setLoadAnimation, runLoadAnimation, loadAnimation } =
+    useLoadAnimation();
+  const { setLocation } = useLocation();
+  const { showMessage, getUserChoice } = useMessage();
+  const { postRequest } = useFetch();
+
   const quickActions: quicActions[] = [
     {
       name: "Report a Crime",
@@ -36,5 +48,73 @@ export const useHomePage = () => {
     },
   ];
 
-  return { quickActions };
+  const sendSOS = async () => {
+    setLoadAnimation({
+      state: true,
+      message: "Obtaining user location...",
+    });
+    let location = await setLocation();
+
+    if (typeof location === "string") {
+      showMessage({ text: location, status: "warning", timeout: 7000 });
+      return;
+    }
+
+    if (location.accuracy > 15) {
+      console.log("passed here...");
+      setLoadAnimation({ state: false });
+      showMessage({
+        text: "Enter your location",
+        status: "normal",
+        customRes: true,
+      });
+      location = await getUserChoice();
+      setLoadAnimation({
+        state: true,
+        message: "Sending SOS...",
+      });
+    }
+
+    const { response, error } = await postRequest({
+      data: {
+        incident_type: "emergency",
+        location: typeof location === "string" ? location : "SOS",
+        latitude: typeof location === "string" ? "" : location.lat,
+        longitude: typeof location === "string" ? "" : location.lng,
+        description: "Emergency alert!",
+        time: String(
+          new Date().toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          }),
+        ),
+        date: String(Date.now()),
+        evidence_provided: false,
+        anonymous: false,
+        type: "emergency",
+      },
+      route: "/report",
+      type: "object",
+    });
+
+    if (error) {
+      setLoadAnimation({ state: false });
+      showMessage({ text: error, status: "error", timeout: 7000 });
+    }
+
+    if (response) {
+      setLoadAnimation({ state: false });
+      navigate(`/report-status/${response.message}`);
+    }
+  };
+
+  return {
+    quickActions,
+    loadAnimation,
+    runLoadAnimation,
+    setLoadAnimation,
+    navigate,
+    sendSOS,
+  };
 };

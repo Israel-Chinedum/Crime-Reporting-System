@@ -1,20 +1,24 @@
 import { PieChart, Pie, ResponsiveContainer } from "recharts";
+import { useAdminDashboard } from "../Pages/private-pages/admin-pages/admin-dashboard-page/useAdminDashboard";
 
 export const DoughnutChart = () => {
+  const { activeReports, resolvedReports, emergencyReports } =
+    useAdminDashboard();
+
   const data = [
     {
       name: "Active",
-      value: 36 ,
+      value: activeReports,
       fill: "#f39c12",
     },
     {
       name: "Resolved",
-      value: 92,
+      value: resolvedReports,
       fill: "#1447e6",
     },
     {
       name: "Emergency",
-      value: 7,
+      value: emergencyReports,
       fill: "#e63946",
     },
   ];

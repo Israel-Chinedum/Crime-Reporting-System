@@ -14,14 +14,14 @@
   --color-panel: rgba(255, 255, 255, 0.03);
   --color-border: rgba(168, 200, 232, 0.1);
   --color-accent-dim: rgba(230, 57, 70, 0.15);
-
-  /* ====== CUSTOM BREAK POINTS ====== */
+  --color-dark: rgb(13, 18, 26); /* ====== CUSTOM BREAK POINTS ====== */
   --breakpoint-mobile: 460px;
   --breakpoint-smobile: 320px;
 }
 
 body {
   background-color: var(--color-navy);
+  color: rgb(13, 18, 26);
 }
 
 .input {

@@ -1,8 +1,9 @@
 import { cn } from "../utilities/classNames";
-import { FaBell, FaHome } from "react-icons/fa";
+import { FaBell, FaExclamationTriangle, FaHome } from "react-icons/fa";
 import { FaFile } from "react-icons/fa";
 import { FaMap } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
+import { MdSecurity } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 type adminDashboard = {
@@ -49,7 +50,7 @@ export const AdminSideBar = ({ active = "dashboard" }: adminDashboard) => {
           )}
           onClick={() => navigate("/admin-alerts")}
         >
-          <FaBell className={cn("text-xl")} />
+          <FaExclamationTriangle className={cn("text-xl")} />
           Alerts
         </li>
 
@@ -61,8 +62,8 @@ export const AdminSideBar = ({ active = "dashboard" }: adminDashboard) => {
           )}
           onClick={() => navigate("/admin-map")}
         >
-          <FaMap className={cn("text-xl")} />
-          Map View
+          <MdSecurity className={cn("text-xl")} />
+          Security Tips
         </li>
 
         {/* ====== Users link ====== */}

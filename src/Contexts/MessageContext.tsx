@@ -1,5 +1,6 @@
 import { createContext, useRef, useState, type ReactNode } from "react";
 import { cn } from "../utilities/classNames";
+import { Button } from "../Components/Button";
 
 export type messageType = {
   text: string;
@@ -9,12 +10,15 @@ export type messageType = {
   pos_x?: "left" | "right" | "mid";
   pos_y?: "top" | "bottom" | "mid";
   noBorder?: boolean;
+  question?: boolean;
+  customRes?: boolean;
 };
 
 type contextType = {
   showMessage: (arg: messageType) => void;
   closeMessage: () => void;
   message: messageType | null;
+  getUserChoice: () => Promise<unknown>;
 };
 
 export const MessageContext = createContext<contextType | null>(null);
@@ -22,6 +26,9 @@ export const MessageContext = createContext<contextType | null>(null);
 export const MessageProvider = ({ children }: { children: ReactNode }) => {
   const [message, setMessage] = useState<messageType | null>(null);
   const timer = useRef<number>(null);
+  const customResMsg = useRef<string>("");
+
+  const userChoice = useRef<any>(null);
 
   const showMessage = ({
     text,
@@ -31,15 +38,23 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
     pos_x = "mid",
     pos_y = "top",
     noBorder = false,
+    question = false,
+    customRes = false,
   }: messageType) => {
     // Check if a timer has been set and clear it
     if (timer.current) {
       clearTimeout(timer.current);
     }
 
+    console.log(customRes);
+
+    if (question || customRes) {
+      timeout = null;
+    }
+
     // setMessage
     setTimeout(() => {
-      setMessage({ text, status, pos_x, pos_y, noBorder });
+      setMessage({ text, status, pos_x, pos_y, noBorder, question, customRes });
     }, delay);
 
     if (timeout) {
@@ -51,14 +66,28 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
     setMessage(null);
   };
 
+  const getUserChoice = () => {
+    return new Promise((resolve) => {
+      userChoice.current = resolve;
+    });
+  };
+
   return (
-    <MessageContext.Provider value={{ showMessage, closeMessage, message }}>
+    <MessageContext.Provider
+      value={{
+        showMessage,
+        closeMessage,
+        message,
+        getUserChoice,
+      }}
+    >
       {message && (
         <div
           className={cn(
             "rounded-xl p-3 w-max max-w-[80dvw] absolute bg-deep",
             "left-[50%] translate-x-[-50%] top-[3dvh] 2xl:text-[1.2rem]",
-            "flex items-center gap-1 z-50! wrap-break-word text-center",
+            "flex flex-col justify-center items-center gap-1 z-50! wrap-break-word text-center",
+            message.status === "pending" && "flex-row",
             // condition for vertical message position
             message.pos_y === "top" && "top-[3dvh]",
             message.pos_y === "mid" && "top-[50dvh] translate-y-[-50%]",
@@ -81,7 +110,7 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
             message.noBorder && "border-0 bg-transparent",
           )}
         >
-          {message.status === "pending" && (
+          {message.status === "pending" && !message.question && (
             <div
               className={cn(
                 "w-8 h-8 border-t-3 border-r-3 border-custom-white border-dotted",
@@ -90,6 +119,48 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
             ></div>
           )}
           {message.text}
+          {message.question && (
+            <div className={cn("flex gap-2 mt-3")}>
+              <Button
+                onClick={() => {
+                  userChoice.current(false);
+                  closeMessage();
+                }}
+                classes="bg-gray-400 w-max px-10"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  userChoice.current(true);
+                  closeMessage();
+                }}
+                classes="w-max px-10"
+              >
+                Confirm
+              </Button>
+            </div>
+          )}
+          {message.customRes && (
+            <div className={cn("flex flex-col gap-4")}>
+              <input
+                className={cn("p-2 border-b outline-none")}
+                type="text"
+                placeholder="Here..."
+                onChange={(e) => {
+                  customResMsg.current = e.target.value;
+                }}
+              />
+              <Button
+                onClick={() => {
+                  userChoice.current(customResMsg.current);
+                  closeMessage();
+                }}
+              >
+                Continue
+              </Button>
+            </div>
+          )}
         </div>
       )}
       {children}

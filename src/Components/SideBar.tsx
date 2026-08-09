@@ -40,7 +40,9 @@ export const SideBar = ({
           onClick={() => navigate("/alerts")}
         >
           <FaBell className={cn("text-2xl")} />{" "}
-          <span className={cn("text-[14px]", "sm:text-[18px]")}>Alerts</span>
+          <span className={cn("text-[14px]", "sm:text-[18px]")}>
+            Notifications
+          </span>
         </li>
 
         <li

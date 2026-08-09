@@ -1,12 +1,21 @@
 import { AdminSideBar } from "../../../../Components/AdminSideBar";
 import { cn } from "../../../../utilities/classNames";
-import { FaCalendar } from "react-icons/fa";
+import { FaCalendar, FaCheck } from "react-icons/fa";
 import { FaArrowUp } from "react-icons/fa";
 import { FaBarsProgress } from "react-icons/fa6";
 import { DoughnutChart } from "../../../../Components/DoughnutChart";
 import { TrendChart } from "../../../../Components/TrendChart";
+import { useAdminDashboard } from "./useAdminDashboard";
 
 export const AdminDashboard = () => {
+  const {
+    activeReports,
+    totalReports,
+    resolvedReports,
+    emergencyReports,
+    recentReports,
+  } = useAdminDashboard();
+
   return (
     <div className={cn("flex")}>
       <AdminSideBar active="dashboard" />
@@ -54,20 +63,23 @@ export const AdminDashboard = () => {
           {/* ====== TOTAL REPORTS CARD ====== */}
           <div className={cn("bg-deep p-3 rounded-md flex flex-col gap-4")}>
             <p className={cn("text-xl text-blue-600")}>Total Reports</p>
-            <p className={cn("text-4xl font-bold text-blue-600")}>128</p>
+            <p className={cn("text-4xl font-bold text-blue-600")}>
+              {totalReports}
+            </p>
             <p className={cn("flex gap-1")}>
               <span className={cn("flex gap-1 items-center text-custom-green")}>
                 <FaArrowUp />
-                18%
               </span>{" "}
-              from yesterday
+              Tracked
             </p>
           </div>
 
           {/* ====== ACTIVE REPORTS CARD ====== */}
           <div className={cn("bg-deep p-3 rounded-md flex flex-col gap-4")}>
             <p className={cn("text-xl text-custom-orange")}>Active Reports</p>
-            <p className={cn("text-4xl font-bold text-custom-orange")}>36</p>
+            <p className={cn("text-4xl font-bold text-custom-orange")}>
+              {activeReports}
+            </p>
             <p className={cn("flex gap-1")}>
               <span
                 className={cn("flex gap-1 items-center text-custom-orange")}
@@ -81,20 +93,23 @@ export const AdminDashboard = () => {
           {/* ====== RESOLVED REPORTS CARD ====== */}
           <div className={cn("bg-deep p-3 rounded-md flex flex-col gap-4")}>
             <p className={cn("text-xl text-custom-green")}>Resolved Reports</p>
-            <p className={cn("text-4xl font-bold text-custom-green")}>92</p>
+            <p className={cn("text-4xl font-bold text-custom-green")}>
+              {resolvedReports}
+            </p>
             <p className={cn("flex gap-1")}>
               <span className={cn("flex gap-1 items-center text-custom-green")}>
-                <FaArrowUp />
-                22%
+                <FaCheck />
               </span>{" "}
-              from yesterday
+              Closed
             </p>
           </div>
 
           {/* ====== TOTAL EMERGENCY ALERTS CARD ====== */}
           <div className={cn("bg-deep p-3 rounded-md flex flex-col gap-4")}>
             <p className={cn("text-xl text-accent")}>Emergency Alerts</p>
-            <p className={cn("text-4xl font-bold text-accent")}>7</p>
+            <p className={cn("text-4xl font-bold text-accent")}>
+              {emergencyReports}
+            </p>
             <p className={cn("text-accent")}>High priority</p>
           </div>
         </div>
@@ -128,7 +143,9 @@ export const AdminDashboard = () => {
                     "flex flex-col items-center justify-center",
                   )}
                 >
-                  <span className={cn("text-4xl font-bold")}>36</span>{" "}
+                  <span className={cn("text-4xl font-bold")}>
+                    {activeReports}
+                  </span>{" "}
                   <span className={cn("text-2xl")}>Active</span>
                 </h1>
                 <DoughnutChart />
@@ -145,7 +162,7 @@ export const AdminDashboard = () => {
                     ></div>
                     <h1>Resolved</h1>
                   </div>
-                  <p>92</p>
+                  <p>{resolvedReports}</p>
                 </div>
 
                 {/* ====== In progress ====== */}
@@ -157,7 +174,7 @@ export const AdminDashboard = () => {
                     ></div>
                     <h1>In Progress</h1>
                   </div>
-                  <p>36</p>
+                  <p>{activeReports}</p>
                 </div>
 
                 {/* ====== Emergency ====== */}
@@ -169,7 +186,7 @@ export const AdminDashboard = () => {
                     ></div>
                     <h1>Emergency</h1>
                   </div>
-                  <p>7</p>
+                  <p>{emergencyReports}</p>
                 </div>
               </div>
             </div>
@@ -185,6 +202,17 @@ export const AdminDashboard = () => {
             </div>
           </div>
         </div>
+        {/* 
+/
+/
+/
+/
+/
+/
+/
+/
+/
+/       */}
 
         {/* ====== RECENT REPORTS ====== */}
         <div className={cn("mt-10 mb-5 bg-deep p-3 rounded-xl")}>
@@ -209,121 +237,53 @@ export const AdminDashboard = () => {
             {/* ====== table body ====== */}
             <tbody>
               {/* TR */}
-              <tr>
-                {/* ====== report id ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  CR-2026-05-21-0007
-                </td>
-                {/* ====== type ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>Robbery</td>
-                {/* ====== location ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  School Gate
-                </td>
-                {/* ====== status ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  <p
-                    className={cn(
-                      "bg-green-300 w-max px-2 rounded-full text-green-600 font-bold",
-                    )}
-                  >
-                    In Progress
-                  </p>
-                </td>
-                {/* ====== reported by ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  Anonymous
-                </td>
-                {/* ====== time ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>10:36 AM</td>
-              </tr>
-              {/* TR */}
-              <tr>
-                {/* ====== report id ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  CR-2026-05-21-0007
-                </td>
-                {/* ====== type ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>Robbery</td>
-                {/* ====== location ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  School Gate
-                </td>
-                {/* ====== status ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  <p
-                    className={cn(
-                      "bg-green-300 w-max px-2 rounded-full text-green-600 font-bold",
-                    )}
-                  >
-                    In Progress
-                  </p>
-                </td>
-                {/* ====== reported by ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  Anonymous
-                </td>
-                {/* ====== time ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>10:36 AM</td>
-              </tr>
-              {/* TR */}
-              <tr>
-                {/* ====== report id ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  CR-2026-05-21-0007
-                </td>
-                {/* ====== type ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>Robbery</td>
-                {/* ====== location ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  School Gate
-                </td>
-                {/* ====== status ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  <p
-                    className={cn(
-                      "bg-green-300 w-max px-2 rounded-full text-green-600 font-bold",
-                    )}
-                  >
-                    In Progress
-                  </p>
-                </td>
-                {/* ====== reported by ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  Anonymous
-                </td>
-                {/* ====== time ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>10:36 AM</td>
-              </tr>
-              {/* TR */}
-              <tr>
-                {/* ====== report id ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  CR-2026-05-21-0007
-                </td>
-                {/* ====== type ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>Robbery</td>
-                {/* ====== location ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  School Gate
-                </td>
-                {/* ====== status ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  <p
-                    className={cn(
-                      "bg-green-300 w-max px-2 rounded-full text-green-600 font-bold",
-                    )}
-                  >
-                    In Progress
-                  </p>
-                </td>
-                {/* ====== reported by ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>
-                  Anonymous
-                </td>
-                {/* ====== time ====== */}
-                <td className={cn("border-b border-gray-600 p-4")}>10:36 AM</td>
-              </tr>
+              {typeof recentReports === "string" ? (
+                <tr
+                  className={cn(
+                    "text-custom-green",
+                    recentReports.includes("Unable") && "text-accent",
+                  )}
+                >
+                  <td>{recentReports}</td>
+                </tr>
+              ) : (
+                recentReports.map((report: any) => (
+                  <tr key={report.reportId}>
+                    {/* ====== report id ====== */}
+                    <td className={cn("border-b border-gray-600 p-4")}>
+                      {report.reportId}
+                    </td>
+                    {/* ====== type ====== */}
+                    <td className={cn("border-b border-gray-600 p-4")}>
+                      {report.incident_type}
+                    </td>
+                    {/* ====== location ====== */}
+                    <td className={cn("border-b border-gray-600 p-4")}>
+                      {report.location}
+                    </td>
+                    {/* ====== status ====== */}
+                    <td className={cn("border-b border-gray-600 p-4")}>
+                      <p
+                        className={cn(
+                          "bg-green-300/20 w-max px-2 rounded-full text-green-600 font-bold",
+                          report.status === "active" &&
+                            "bg-custom-orange/20 text-custom-orange",
+                        )}
+                      >
+                        {report.status}
+                      </p>
+                    </td>
+                    {/* ====== reported by ====== */}
+                    <td className={cn("border-b border-gray-600 p-4")}>
+                      {report.reported_by}
+                    </td>
+                    {/* ====== time ====== */}
+                    <td className={cn("border-b border-gray-600 p-4")}>
+                      {report.time}
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

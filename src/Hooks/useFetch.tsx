@@ -52,6 +52,8 @@ export const useFetch = () => {
         case "GET":
           return getRequest(route);
         case "POST":
+          // console.log(res.status, response);
+          // break;
           return postRequest({ data, route, type });
         case "MULTIPART":
           return multipartRequest({ form, route, type });
@@ -132,9 +134,9 @@ export const useFetch = () => {
     }
 
     let accessToken = "";
-    if (route !== "/signin") {
+    if (route !== "/user/signin") {
       const userData = JSON.parse(localStorage.getItem("userData")!);
-      accessToken = userData;
+      accessToken = userData.accessToken;
     }
 
     try {
@@ -220,7 +222,8 @@ export const useFetch = () => {
       response = await res.json();
     } catch (err: any) {
       console.log(err);
-      err.message === "Failed to fetch" && (err = "Cannot connect to server!");
+      err.message === "Failed to fetch" &&
+        (err.message = "Cannot connect to server!");
       error = err.message;
     }
 

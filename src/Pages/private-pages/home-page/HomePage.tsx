@@ -2,18 +2,20 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { useHomePage } from "./useHomePage";
 import { cn } from "../../../utilities/classNames";
 import { SideBar } from "../../../Components/SideBar";
-import { useNavigate } from "react-router-dom";
 import { useLocation } from "../../../Hooks/useLocation";
 import { useMessage } from "../../../Hooks/useMessage";
-import { useLoadAnimation } from "../../../Hooks/useLoadAnimation";
 
 export const HomePage = () => {
-  const navigate = useNavigate();
-  const { quickActions } = useHomePage();
+  const {
+    quickActions,
+    loadAnimation,
+    setLoadAnimation,
+    runLoadAnimation,
+    navigate,
+    sendSOS,
+  } = useHomePage();
   const { showMessage } = useMessage();
   const { setLocation } = useLocation();
-  const { loadAnimation, setLoadAnimation, runLoadAnimation } =
-    useLoadAnimation();
 
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
@@ -41,9 +43,10 @@ export const HomePage = () => {
               //   mobile and above
               "mobile:max-w-[320px]",
             )}
+            onClick={() => sendSOS()}
           >
             <FaPhoneAlt className={cn("text-3xl")} />
-            <div>
+            <div onClick={() => {}}>
               <h2 className={cn("font-bold text-[18px]")}>Emergency SOS</h2>
               <p className={cn("text-[14px]")}>
                 Tap to call for immediate help

@@ -3,10 +3,17 @@ import { cn } from "../../../utilities/classNames";
 import { FaCheck } from "react-icons/fa";
 import { SideBar } from "../../../Components/SideBar";
 import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useSocket } from "../../../Hooks/useSocket";
 
 export const ReportStatus = () => {
   const { reportId } = useParams();
   const navigate = useNavigate();
+  const socket = useSocket();
+
+  useEffect(() => {
+    socket.emit("report-sent", { reportId });
+  }, []);
 
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
