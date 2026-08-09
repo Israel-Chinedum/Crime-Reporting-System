@@ -1,7 +1,6 @@
 import { cn } from "../utilities/classNames";
-import { FaBell, FaExclamationTriangle, FaHome } from "react-icons/fa";
+import { FaExclamationTriangle, FaHome } from "react-icons/fa";
 import { FaFile } from "react-icons/fa";
-import { FaMap } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
 import { MdSecurity } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
