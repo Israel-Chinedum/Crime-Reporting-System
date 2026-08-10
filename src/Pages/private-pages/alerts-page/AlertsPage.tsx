@@ -33,15 +33,21 @@ export const AlertsPage = () => {
               <div className={cn("bg-deep p-3 rounded-md mt-2")}>
                 <div className={cn("flex justify-between")}>
                   <h1 className={cn("font-bold")}>
-                    {notification.incident_type}
+                    {notification.incident_type.toUpperCase()}
                   </h1>
-                  <div className={cn("flex gap-2 items-center")}>
-                    <p className={cn("text-[14px]")}>{notification.time}</p>
-                    <p className={cn("text-[14px]")}>{notification.date}</p>
+                  <div className={cn("sm:flex gap-4 items-center")}>
+                    <p className={cn("text-[14px] text-gray-400")}>
+                      {notification.time}
+                    </p>
+                    <p className={cn("text-[14px] text-gray-400")}>
+                      {notification.date.slice(0, 10)}
+                    </p>
                   </div>
                 </div>
-                <p>{notification.description}</p>
-                <p>{notification.location}</p>
+                <p className={cn("mt-4")}>{notification.description}</p>
+                <p className={cn("mt-4 text-gray-400")}>
+                  Location: {notification.location}
+                </p>
               </div>
             ))
           ) : (
