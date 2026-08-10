@@ -89,7 +89,7 @@ export const useHomePage = () => {
             hour12: true,
           }),
         ),
-        date: new Date().toISOString().slice(0, -5).replace("T", " "),
+        date: new Date().toISOString().slice(0, 19).replace("T", " "),
         evidence_provided: false,
         anonymous: false,
         type: "emergency",
