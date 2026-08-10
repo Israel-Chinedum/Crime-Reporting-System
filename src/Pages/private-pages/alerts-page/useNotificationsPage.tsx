@@ -18,14 +18,27 @@ export const useNotificationsPage = () => {
         showMessage({ text: response.error, status: "error" });
         return;
       }
-      setNotifications(response);
+      setNotifications(
+        response.sort((a: any, b: any) => {
+          const numA = new Date(a.date).getTime();
+          const numB = new Date(b.date).getTime();
+          return numB - numA;
+        }),
+      );
       closeMessage();
     });
   };
 
   useEffect(() => {
     socket.on("notification", (data: any) => {
-      setNotifications((prev) => [data, ...prev]);
+      console.log(data);
+      setNotifications(
+        data.sort((a: any, b: any) => {
+          const numA = new Date(a.date).getTime();
+          const numB = new Date(b.date).getTime();
+          return numB - numA;
+        }),
+      );
     });
 
     getNotifications();
