@@ -30,7 +30,10 @@ export const AlertsPage = () => {
           {/* ====== content ====== */}
           {notifications.length !== 0 ? (
             notifications.map((notification) => (
-              <div className={cn("bg-deep p-3 rounded-md mt-2")}>
+              <div
+                key={new Date(notification.createdAt).getTime()}
+                className={cn("bg-deep p-3 rounded-md mt-2")}
+              >
                 <div className={cn("flex justify-between")}>
                   <h1 className={cn("font-bold")}>
                     {notification.incident_type.toUpperCase()}

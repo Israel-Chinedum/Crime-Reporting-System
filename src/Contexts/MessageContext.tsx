@@ -46,8 +46,6 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
       clearTimeout(timer.current);
     }
 
-    console.log(customRes);
-
     if (question || customRes) {
       timeout = null;
     }
