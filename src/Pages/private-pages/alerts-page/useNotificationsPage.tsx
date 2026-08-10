@@ -4,17 +4,22 @@ import { useMessage } from "../../../Hooks/useMessage";
 
 export const useNotificationsPage = () => {
   const [notifications, setNotifications] = useState<any[]>([]);
-  const { showMessage } = useMessage();
+  const { showMessage, closeMessage } = useMessage();
   const socket = useSocket();
 
   const getNotifications = () => {
+    showMessage({
+      text: "Fetching notifications...",
+      status: "pending",
+      timeout: null,
+    });
     socket.emit("notification", (response: any) => {
       if (response.error) {
         showMessage({ text: response.error, status: "error" });
         return;
       }
-      console.log("RESPONSE:", response);
       setNotifications(response);
+      closeMessage();
     });
   };
 
@@ -27,6 +32,7 @@ export const useNotificationsPage = () => {
 
     return () => {
       socket.off("notification");
+      closeMessage();
     };
   }, []);
 
