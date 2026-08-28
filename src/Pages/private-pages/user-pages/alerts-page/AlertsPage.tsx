@@ -1,6 +1,6 @@
-import { InAppHeader } from "../../../Components/InAppHeader";
-import { cn } from "../../../utilities/classNames";
-import { SideBar } from "../../../Components/SideBar";
+import { InAppHeader } from "../../../../Components/InAppHeader";
+import { cn } from "../../../../utilities/classNames";
+import { SideBar } from "../../../../Components/SideBar";
 import { useNotificationsPage } from "./useNotificationsPage";
 
 export const AlertsPage = () => {

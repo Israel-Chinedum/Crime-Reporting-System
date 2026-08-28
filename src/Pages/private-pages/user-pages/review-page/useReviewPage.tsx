@@ -1,12 +1,12 @@
 import { useRef } from "react";
-import { useFetch } from "../../../Hooks/useFetch";
-import { useLoadAnimation } from "../../../Hooks/useLoadAnimation";
-import { useLocation } from "../../../Hooks/useLocation";
-import { useReport } from "../../../Hooks/useReport";
-import { useMessage } from "../../../Hooks/useMessage";
+import { useFetch } from "../../../../Hooks/useFetch";
+import { useLoadAnimation } from "../../../../Hooks/useLoadAnimation";
+import { useLocation } from "../../../../Hooks/useLocation";
+import { useReport } from "../../../../Hooks/useReport";
+import { useMessage } from "../../../../Hooks/useMessage";
 import { useNavigate } from "react-router-dom";
-import { formatTime } from "../../../utilities/formatTime";
-import { useSocket } from "../../../Hooks/useSocket";
+import { formatTime } from "../../../../utilities/formatTime";
+import { useSocket } from "../../../../Hooks/useSocket";
 
 export const useReviewPage = () => {
   const { setLocation } = useLocation();

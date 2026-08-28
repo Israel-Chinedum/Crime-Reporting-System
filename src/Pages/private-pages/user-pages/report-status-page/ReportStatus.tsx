@@ -1,10 +1,10 @@
-import { Button } from "../../../Components/Button";
-import { cn } from "../../../utilities/classNames";
+import { Button } from "../../../../Components/Button";
+import { cn } from "../../../../utilities/classNames";
 import { FaCheck } from "react-icons/fa";
-import { SideBar } from "../../../Components/SideBar";
+import { SideBar } from "../../../../Components/SideBar";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useSocket } from "../../../Hooks/useSocket";
+import { useSocket } from "../../../../Hooks/useSocket";
 
 export const ReportStatus = () => {
   const { reportId } = useParams();

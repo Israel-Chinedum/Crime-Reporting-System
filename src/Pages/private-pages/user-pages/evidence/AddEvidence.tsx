@@ -1,11 +1,11 @@
-import { cn } from "../../../utilities/classNames";
-import { InAppHeader } from "../../../Components/InAppHeader";
-import { Stepper } from "../../../Components/Stepper";
-import { Button } from "../../../Components/Button";
-import { SideBar } from "../../../Components/SideBar";
+import { cn } from "../../../../utilities/classNames";
+import { InAppHeader } from "../../../../Components/InAppHeader";
+import { Stepper } from "../../../../Components/Stepper";
+import { Button } from "../../../../Components/Button";
+import { SideBar } from "../../../../Components/SideBar";
 import { useAddEvidence } from "./useAddEvidence";
 import { useEffect, useState } from "react";
-import { useCamera } from "../../../Hooks/useCamera";
+import { useCamera } from "../../../../Hooks/useCamera";
 import { FaCamera, FaMicrophone, FaPause, FaVideo } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 

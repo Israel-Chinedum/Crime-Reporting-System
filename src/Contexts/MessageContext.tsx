@@ -29,6 +29,7 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
   const customResMsg = useRef<string>("");
 
   const userChoice = useRef<any>(null);
+  const cancelOp = useRef<any>(null);
 
   const showMessage = ({
     text,
@@ -65,8 +66,9 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const getUserChoice = () => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       userChoice.current = resolve;
+      cancelOp.current = reject;
     });
   };
 
@@ -149,14 +151,26 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
                   customResMsg.current = e.target.value;
                 }}
               />
-              <Button
-                onClick={() => {
-                  userChoice.current(customResMsg.current);
-                  closeMessage();
-                }}
-              >
-                Continue
-              </Button>
+              <div className={cn("flex gap-2 items-center justify-center")}>
+                <Button
+                  onClick={() => {
+                    cancelOp.current();
+                    closeMessage();
+                  }}
+                  classes="bg-gray-400/20 w-25 px-4"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={() => {
+                    userChoice.current(customResMsg.current);
+                    closeMessage();
+                  }}
+                  classes="w-25 px-4"
+                >
+                  Continue
+                </Button>
+              </div>
             </div>
           )}
         </div>

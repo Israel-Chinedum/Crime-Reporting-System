@@ -1,9 +1,9 @@
-import { InAppHeader } from "../../../Components/InAppHeader";
-import { Stepper } from "../../../Components/Stepper";
-import { cn } from "../../../utilities/classNames";
-import { Button } from "../../../Components/Button";
-import { SideBar } from "../../../Components/SideBar";
-import { useReport } from "../../../Hooks/useReport";
+import { InAppHeader } from "../../../../Components/InAppHeader";
+import { Stepper } from "../../../../Components/Stepper";
+import { cn } from "../../../../utilities/classNames";
+import { Button } from "../../../../Components/Button";
+import { SideBar } from "../../../../Components/SideBar";
+import { useReport } from "../../../../Hooks/useReport";
 import { useReviewPage } from "./useReviewPage";
 
 export const ReviewPage = () => {

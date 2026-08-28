@@ -48,9 +48,9 @@ export const AdminAlertsPage = () => {
         </div>
 
         {/* ====== BODY ====== */}
-        <div>
+        <div className={cn("h-[90dvh] overflow-y-auto relative")}>
           <table className={cn("mt-5 w-full")}>
-            <thead className={cn("text-left")}>
+            <thead className={cn("text-left sticky top-0")}>
               <tr className={cn("border-b border-gray-600 bg-custom-blue")}>
                 <th className={cn("text-xl px-2 py-5")}>Alert Type</th>
                 <th className={cn("text-xl px-2 py-5")}>Time</th>

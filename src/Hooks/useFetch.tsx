@@ -34,6 +34,7 @@ export const useFetch = () => {
       const response = await res.json();
 
       if (!res.ok) {
+        console.log("error happen");
         if (res.status === 401 || res.status === 403) {
           showMessage({
             text: "User session expired!",
@@ -45,7 +46,7 @@ export const useFetch = () => {
           throw new Error(response.message);
         }
       }
-
+      console.log("Token renewed!");
       userData["accessToken"] = response.accessToken;
       localStorage.setItem("userData", JSON.stringify(userData));
 
@@ -84,10 +85,13 @@ export const useFetch = () => {
       });
 
       if (!res.ok) {
-        if (res.status === 401 || res.status === 403) {
+        const err = await res.json();
+        if (
+          (res.status === 401 || res.status === 403) &&
+          err.message.toLowerCase().includes("token")
+        ) {
           return renewToken({ fnc: "GET", route });
         } else {
-          const err = await res.json();
           if (typeof err.message === "string") {
             throw new Error(err.message);
           }
@@ -153,13 +157,14 @@ export const useFetch = () => {
       });
 
       if (!res.ok) {
+        const err = await res.json();
         if (
-          (res.status === 401 && route !== "/user/signin") ||
-          (res.status === 403 && route !== "/user/signin")
+          ((res.status === 401 && route !== "/user/signin") ||
+            (res.status === 403 && route !== "/user/signin")) &&
+          err.message.toLowerCase().includes("token")
         ) {
           return renewToken({ fnc: "POST", route, data, type });
         } else {
-          const err = await res.json();
           if (typeof err.message === "string") {
             throw new Error(err.message);
           }
@@ -208,11 +213,14 @@ export const useFetch = () => {
       });
 
       if (!res.ok) {
-        if (res.status === 401 || res.status === 403) {
+        const err = await res.json();
+        if (
+          (res.status === 401 || res.status === 403) &&
+          err.message.toLowerCase().includes("token")
+        ) {
           console.log("I ran");
           return renewToken({ fnc: "MULTIPART", route, form, type });
         } else {
-          const err = await res.json();
           if (typeof err.message === "string") {
             throw new Error(err.message);
           }

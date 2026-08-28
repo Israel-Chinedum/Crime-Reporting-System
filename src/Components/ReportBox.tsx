@@ -41,17 +41,20 @@ export const useReportBox = ({ controls = true }: { controls?: boolean }) => {
     return (
       <div
         className={cn(
-          "text-white bg-dark px-10 py-15 rounded-xl gap-4 grid ml-20 absolute z-10",
-          evidence_provided && "grid-cols-2",
+          "text-white w-150 mt-[2dvh] h-[90dvh] overflow-y-auto bg-dark px-10 py-15 rounded-xl gap-4 grid left-[50%] translate-x-[-50%] absolute z-10",
+          evidence_provided && "grid-cols-2 w-250",
         )}
       >
         {/* ====== REPORT DETAILS ====== */}
-        <div className={cn(" col-span-2 flex items-center justify-between")}>
+        <div
+          className={cn(
+            "flex items-center justify-between",
+            evidence_provided && "col-span-2",
+          )}
+        >
           <h1 className={cn("text-xl font-bold w-max ")}>REPORT DETAILS</h1>
           <FaX
-            className={cn(
-              "font-bold text-xl translate-x-[-300%] hover:text-accent",
-            )}
+            className={cn("font-bold text-xl hover:text-accent")}
             onClick={() => setShowBox(false)}
           />
         </div>
@@ -98,11 +101,15 @@ export const useReportBox = ({ controls = true }: { controls?: boolean }) => {
 
             {/* ====== Description ====== */}
             <li className={cn("font-normal flex flex-col")}>
-              <label htmlFor="">Description</label>
+              <label htmlFor="" className={cn("mb-4")}>
+                Description
+              </label>
               <textarea
                 defaultValue={description}
                 id=""
-                className={cn("bg-navy w-140 h-50 p-2 resize-none")}
+                className={cn(
+                  "bg-navy w-full border-2 rounded-xl max-h-50 p-2 resize-none",
+                )}
               ></textarea>
             </li>
 
@@ -117,7 +124,7 @@ export const useReportBox = ({ controls = true }: { controls?: boolean }) => {
         {/* ====== REPORT EVIDENCE ====== */}
         {evidence_provided && (
           <div>
-            <div className={cn("w-max justify-self-end")}>
+            <div className={cn("w-full justify-self-end")}>
               <h1 className={cn("text-xl font-bold mb-5")}>Evidence</h1>
               <h2 className={cn("mb-2")}>
                 {fileMetaData?.mimetype.includes("image")
@@ -128,10 +135,15 @@ export const useReportBox = ({ controls = true }: { controls?: boolean }) => {
               </h2>
               <div
                 id="evidence-holder"
-                className={cn("bg-deep w-120 h-90 rounded-md overflow-hidden")}
+                className={cn(
+                  "bg-deep w-full h-90 rounded-xl overflow-hidden flex justify-center",
+                )}
               >
                 {fileMetaData?.mimetype.includes("image") && (
-                  <img src={src!} className={cn("max-w-full max-h-full")} />
+                  <img
+                    src={src!}
+                    className={cn("max-w-full rounded-md max-h-full")}
+                  />
                 )}
                 {fileMetaData?.mimetype.includes("audio") && (
                   <audio controls src={src!}></audio>
@@ -151,7 +163,12 @@ export const useReportBox = ({ controls = true }: { controls?: boolean }) => {
 
         {/* ====== BUTTONS ====== */}
         {controls && updateReport && (
-          <div className={cn("col-span-2 grid grid-cols-3 w-max gap-2")}>
+          <div
+            className={cn(
+              "flex flex-wrap gap-2",
+              evidence_provided && "col-span-2",
+            )}
+          >
             {/* Resolve button */}
             <Button
               onClick={() => {

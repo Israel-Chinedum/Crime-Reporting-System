@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSocket } from "../../../Hooks/useSocket";
-import { useMessage } from "../../../Hooks/useMessage";
+import { useSocket } from "../../../../Hooks/useSocket";
+import { useMessage } from "../../../../Hooks/useMessage";
 
 export const useNotificationsPage = () => {
   const [notifications, setNotifications] = useState<any[]>([]);

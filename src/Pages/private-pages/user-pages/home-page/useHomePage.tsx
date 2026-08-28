@@ -3,10 +3,10 @@ import { HiDocumentReport } from "react-icons/hi";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdHealthAndSafety } from "react-icons/md";
 import { FaRoute } from "react-icons/fa";
-import { useLoadAnimation } from "../../../Hooks/useLoadAnimation";
-import { useLocation } from "../../../Hooks/useLocation";
-import { useMessage } from "../../../Hooks/useMessage";
-import { useFetch } from "../../../Hooks/useFetch";
+import { useLoadAnimation } from "../../../../Hooks/useLoadAnimation";
+import { useLocation } from "../../../../Hooks/useLocation";
+import { useMessage } from "../../../../Hooks/useMessage";
+import { useFetch } from "../../../../Hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 
 type quicActions = {
@@ -22,6 +22,7 @@ export const useHomePage = () => {
   const { setLocation } = useLocation();
   const { showMessage, getUserChoice } = useMessage();
   const { postRequest } = useFetch();
+  const username = JSON.parse(localStorage.getItem("userData")!).username;
 
   const quickActions: quicActions[] = [
     {
@@ -57,6 +58,7 @@ export const useHomePage = () => {
 
     if (typeof location === "string") {
       showMessage({ text: location, status: "warning", timeout: 7000 });
+      setLoadAnimation({ state: false });
       return;
     }
 
@@ -110,6 +112,7 @@ export const useHomePage = () => {
   };
 
   return {
+    username,
     quickActions,
     loadAnimation,
     runLoadAnimation,

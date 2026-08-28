@@ -1,11 +1,11 @@
-import { InAppHeader } from "../../../Components/InAppHeader";
-import { cn } from "../../../utilities/classNames";
-import { Stepper } from "../../../Components/Stepper";
-import { Button } from "../../../Components/Button";
-import { SideBar } from "../../../Components/SideBar";
+import { InAppHeader } from "../../../../Components/InAppHeader";
+import { cn } from "../../../../utilities/classNames";
+import { Stepper } from "../../../../Components/Stepper";
+import { Button } from "../../../../Components/Button";
+import { SideBar } from "../../../../Components/SideBar";
 import { useIncidentDetails } from "./useIncidentDetails";
 import { useNavigate } from "react-router-dom";
-import { DropDownInput } from "../../../Components/DropDownInput";
+import { DropDownInput } from "../../../../Components/DropDownInput";
 import { useEffect, useState } from "react";
 
 export const IncidentDetails = () => {

@@ -1,12 +1,12 @@
 import { cn } from "../utilities/classNames";
 import { FaExclamationTriangle, FaHome } from "react-icons/fa";
 import { FaFile } from "react-icons/fa";
-import { FaUserGroup } from "react-icons/fa6";
+import { FaGear } from "react-icons/fa6";
 import { MdSecurity } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 type adminDashboard = {
-  active: "dashboard" | "reports" | "map" | "users" | "alerts";
+  active: "dashboard" | "reports" | "map" | "settings" | "alerts";
 };
 
 export const AdminSideBar = ({ active = "dashboard" }: adminDashboard) => {
@@ -59,7 +59,7 @@ export const AdminSideBar = ({ active = "dashboard" }: adminDashboard) => {
             "flex items-center gap-2 p-4 hover:bg-navy cursor-pointer",
             active === "map" && "text-blue-600",
           )}
-          onClick={() => navigate("/admin-map")}
+          onClick={() => navigate("/admin-security-tips")}
         >
           <MdSecurity className={cn("text-xl")} />
           Security Tips
@@ -69,11 +69,12 @@ export const AdminSideBar = ({ active = "dashboard" }: adminDashboard) => {
         <li
           className={cn(
             "flex items-center gap-2 p-4 hover:bg-navy cursor-pointer",
-            active === "users" && "text-blue-600",
+            active === "settings" && "text-blue-600",
           )}
+          onClick={() => navigate("/admin-settings")}
         >
-          <FaUserGroup className={cn("text-xl")} />
-          Users
+          <FaGear className={cn("text-xl")} />
+          Settings
         </li>
       </ul>
     </nav>

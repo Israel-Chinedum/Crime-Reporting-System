@@ -1,12 +1,13 @@
 import { FaPhoneAlt } from "react-icons/fa";
 import { useHomePage } from "./useHomePage";
-import { cn } from "../../../utilities/classNames";
-import { SideBar } from "../../../Components/SideBar";
-import { useLocation } from "../../../Hooks/useLocation";
-import { useMessage } from "../../../Hooks/useMessage";
+import { cn } from "../../../../utilities/classNames";
+import { SideBar } from "../../../../Components/SideBar";
+import { useLocation } from "../../../../Hooks/useLocation";
+import { useMessage } from "../../../../Hooks/useMessage";
 
 export const HomePage = () => {
   const {
+    username,
     quickActions,
     loadAnimation,
     setLoadAnimation,
@@ -31,7 +32,7 @@ export const HomePage = () => {
           )}
         >
           <div>
-            <h1 className={cn("text-2xl font-bold")}>Hello, Roseline 👋</h1>
+            <h1 className={cn("text-2xl font-bold")}>Hello, {username} 👋</h1>
             <h3>How can we help you today?</h3>
           </div>
 
@@ -84,6 +85,12 @@ export const HomePage = () => {
                   } else {
                     navigate("/incident-details");
                   }
+                }
+                if (action.name === "Track My Reports") {
+                  navigate("/track-my-reports");
+                }
+                if (action.name === "Safety Tips") {
+                  navigate("/safety-tips");
                 }
               }}
             >
