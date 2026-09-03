@@ -27,7 +27,7 @@ export const SafetyTipsPage = () => {
             "text-custom-white py-4 w-[95%] sm:w-[80%] md:w-[70%] lg:w-[60%] mx-auto",
           )}
         >
-          <h2 className={cn("text-2xl font-bold")}>Safety Tips</h2>
+          <h2 className={cn("text-2xl font-bold mt-4")}>Safety Tips</h2>
           <div className={cn("flex flex-col gap-4 mt-5")}>
             {tips.length === 0 ? (
               <p>No tips yet!</p>

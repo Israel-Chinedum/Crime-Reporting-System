@@ -38,7 +38,9 @@ export const HomePage = () => {
           )}
         >
           <div>
-            <h1 className={cn("text-2xl font-bold")}>Hello, {username} 👋</h1>
+            <h1 className={cn("text-2xl font-bold mt-3")}>
+              Hello, {username} 👋
+            </h1>
             <h3>How can we help you today?</h3>
           </div>
 

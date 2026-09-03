@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-import { LoginPage } from "../Pages/public-pages/login-page/LoginPage";
+import { LandingPage } from "../Pages/public-pages/landing-page/LandingPage";
 
 export const UserGuard = () => {
   const userData = JSON.parse(localStorage.getItem("userData")!);
 
   if (!userData || userData.access !== "granted" || userData.role !== "user") {
-    return <LoginPage />;
+    return <LandingPage />;
   } else {
     return <Outlet />;
   }

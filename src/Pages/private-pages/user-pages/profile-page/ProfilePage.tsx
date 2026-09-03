@@ -1,12 +1,13 @@
 import { InAppHeader } from "../../../../Components/InAppHeader";
 import { cn } from "../../../../utilities/classNames";
-import { FaPen } from "react-icons/fa";
+import { FaPen, FaSignOutAlt } from "react-icons/fa";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { Button } from "../../../../Components/Button";
 import { SideBar } from "../../../../Components/SideBar";
 import { useProfile } from "./useProfile";
 import { SelectImageBox } from "../../../../Components/SelectImageBox";
+import { useNavigate } from "react-router-dom";
 
 export const ProfilePage = () => {
   const {
@@ -22,12 +23,16 @@ export const ProfilePage = () => {
     sendOTP,
   } = useProfile();
 
+  const navigate = useNavigate();
+
   return (
     <div className={cn("flex h-dvh flex-col-reverse sm:flex-row")}>
       {loadAnimation.state && runLoadAnimation()}
       <SideBar active="profile" classes="sm:block" />
       <section
-        className={cn("w-full text-custom-white p-3 overflow-auto relative")}
+        className={cn(
+          "w-full text-custom-white p-3 overflow-auto relative h-dvh",
+        )}
       >
         <div
           className={cn(
@@ -423,6 +428,16 @@ export const ProfilePage = () => {
             </Button>
           </div>
         </div>
+        <Button
+          onClick={() => {
+            localStorage.removeItem("userData");
+            navigate("/login");
+          }}
+          classes="sm:hidden! w-full mt-20  bg-accent px-4 flex items-center justify-center gap-2"
+        >
+          <FaSignOutAlt className={cn("text-xl")} />
+          Logout
+        </Button>
       </section>
     </div>
   );

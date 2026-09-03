@@ -1,7 +1,8 @@
-import { FaBell, FaHome } from "react-icons/fa";
+import { FaBell, FaHome, FaSignOutAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import { cn } from "../utilities/classNames";
 import { useNavigate } from "react-router-dom";
+import { Button } from "./Button";
 
 export const SideBar = ({
   active,
@@ -14,7 +15,11 @@ export const SideBar = ({
 
   return (
     <nav
-      className={cn(classes, "text-custom-white bg-deep", "sm:w-50 sm:h-dvh")}
+      className={cn(
+        classes,
+        "text-custom-white bg-deep",
+        "sm:w-50 sm:h-dvh relative",
+      )}
     >
       <ul
         className={cn("flex justify-between", "sm:flex-col sm:gap-5 sm:pt-5")}
@@ -57,6 +62,16 @@ export const SideBar = ({
           <span className={cn("text-[14px]", "sm:text-[18px]")}>Profile</span>
         </li>
       </ul>
+      <Button
+        onClick={() => {
+          localStorage.removeItem("userData");
+          navigate("/login");
+        }}
+        classes="hidden w-[90%] left-[50%] top-[100%] translate-x-[-50%] translate-y-[-130%] absolute bg-accent px-4 sm:flex items-center justify-center gap-2"
+      >
+        <FaSignOutAlt className={cn("text-xl")} />
+        Logout
+      </Button>
     </nav>
   );
 };

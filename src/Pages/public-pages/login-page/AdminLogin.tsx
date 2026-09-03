@@ -53,9 +53,9 @@ export const AdminLoginPage = () => {
         >
           Login
         </Button>
-        <Button classes="w-[95%] mobile:w-full smobile:w-[80%] bg-custom-blue text-[16px] mobile:text-xl">
+        {/* <Button classes="w-[95%] mobile:w-full smobile:w-[80%] bg-custom-blue text-[16px] mobile:text-xl">
           Forgot password
-        </Button>
+        </Button> */}
       </form>
     </section>
   );

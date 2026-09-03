@@ -28,7 +28,7 @@ export const TrackMyReport = () => {
               "absolute w-full inset-0 z-[-1] opacity-20",
             )}
           ></div>
-          <h2 className={cn("text-2xl font-bold")}>Track My Reports</h2>
+          <h2 className={cn("text-2xl font-bold mt-9")}>Track My Reports</h2>
           <h2 className={cn("text-gray-400")}>
             Monitor the status of your submitted reports.
           </h2>
