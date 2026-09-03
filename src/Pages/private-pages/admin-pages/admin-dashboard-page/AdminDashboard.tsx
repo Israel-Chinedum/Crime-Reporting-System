@@ -20,8 +20,16 @@ export const AdminDashboard = () => {
     <div className={cn("flex")}>
       <AdminSideBar active="dashboard" />
       <section
-        className={cn("text-custom-white w-full h-dvh  overflow-y-auto p-3")}
+        className={cn(
+          "text-custom-white w-full h-dvh  overflow-y-auto p-3 relative",
+        )}
       >
+        <div
+          className={cn(
+            "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center",
+            "absolute w-full h-full inset-0 z-[-1] opacity-20",
+          )}
+        ></div>
         <div>
           <div className={cn("flex items-center justify-between")}>
             <h1>Dashboard Overview</h1>
@@ -61,7 +69,11 @@ export const AdminDashboard = () => {
           )}
         >
           {/* ====== TOTAL REPORTS CARD ====== */}
-          <div className={cn("bg-deep p-3 rounded-md flex flex-col gap-4")}>
+          <div
+            className={cn(
+              "bg-deep p-3 rounded-md flex flex-col gap-4 shadow-xl",
+            )}
+          >
             <p className={cn("text-xl text-blue-600")}>Total Reports</p>
             <p className={cn("text-4xl font-bold text-blue-600")}>
               {totalReports}
@@ -75,7 +87,11 @@ export const AdminDashboard = () => {
           </div>
 
           {/* ====== ACTIVE REPORTS CARD ====== */}
-          <div className={cn("bg-deep p-3 rounded-md flex flex-col gap-4")}>
+          <div
+            className={cn(
+              "bg-deep p-3 rounded-md flex flex-col gap-4 shadow-xl",
+            )}
+          >
             <p className={cn("text-xl text-custom-orange")}>Active Reports</p>
             <p className={cn("text-4xl font-bold text-custom-orange")}>
               {activeReports}
@@ -91,7 +107,11 @@ export const AdminDashboard = () => {
           </div>
 
           {/* ====== RESOLVED REPORTS CARD ====== */}
-          <div className={cn("bg-deep p-3 rounded-md flex flex-col gap-4")}>
+          <div
+            className={cn(
+              "bg-deep p-3 rounded-md flex flex-col gap-4 shadow-xl",
+            )}
+          >
             <p className={cn("text-xl text-custom-green")}>Resolved Reports</p>
             <p className={cn("text-4xl font-bold text-custom-green")}>
               {resolvedReports}
@@ -105,7 +125,11 @@ export const AdminDashboard = () => {
           </div>
 
           {/* ====== TOTAL EMERGENCY ALERTS CARD ====== */}
-          <div className={cn("bg-deep p-3 rounded-md flex flex-col gap-4")}>
+          <div
+            className={cn(
+              "bg-deep p-3 rounded-md flex flex-col gap-4 shadow-xl",
+            )}
+          >
             <p className={cn("text-xl text-accent")}>Emergency Alerts</p>
             <p className={cn("text-4xl font-bold text-accent")}>
               {emergencyReports}
@@ -132,7 +156,7 @@ export const AdminDashboard = () => {
           )}
         >
           {/* ====== DOUGHNUT CHART ====== */}
-          <div className={cn("bg-deep w py-4 px-6 rounded-xl")}>
+          <div className={cn("bg-deep w py-4 px-6 rounded-xl shadow-xl")}>
             <h1 className={cn("mb-5 text-xl font-bold")}>Reports by Status</h1>
             <div className={cn("flex items-center gap-8")}>
               {/* ====== Chart ====== */}
@@ -193,7 +217,7 @@ export const AdminDashboard = () => {
           </div>
 
           {/* ====== LINE CHART ====== */}
-          <div className={cn("bg-deep py-4 px-6 rounded-xl")}>
+          <div className={cn("bg-deep py-4 px-6 rounded-xl shadow-xl")}>
             <h1 className={cn("text-xl font-bold mb-5")}>
               Reports by Trend (This Week)
             </h1>
@@ -215,7 +239,7 @@ export const AdminDashboard = () => {
 /       */}
 
         {/* ====== RECENT REPORTS ====== */}
-        <div className={cn("mt-10 mb-5 bg-deep p-3 rounded-xl")}>
+        <div className={cn("mt-10 mb-5 bg-deep p-3 rounded-xl shadow-xl")}>
           <div className={cn("mb-4 flex items-center justify-between")}>
             <h1 className={cn("text-xl font-bold")}>Recent Reports</h1>
             <p className={cn("text-blue-600 cursor-pointer")}>

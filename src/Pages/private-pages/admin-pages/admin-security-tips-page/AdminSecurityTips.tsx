@@ -24,9 +24,15 @@ export const AdminSecurityTips = () => {
       <AdminSideBar active="map" />
       <section
         className={cn(
-          "sm:w-[80%] mx-auto p-3 h-full overflow-auto text-custom-white",
+          "sm:w-full mx-auto p-3 h-full overflow-auto text-custom-white relative",
         )}
       >
+        <div
+          className={cn(
+            "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center",
+            "absolute w-full h-full inset-0 z-[-1] opacity-20",
+          )}
+        ></div>
         <h2 className={cn("")}>Security Tips</h2>
         <div className={cn("flex justify-center pt-20 gap-5")}>
           {/* ====== CREATE AND EDIT TIPS ====== */}
@@ -34,7 +40,7 @@ export const AdminSecurityTips = () => {
             action=""
             className={cn(
               "flex flex-col gap-7 p-4 shadow-xl border border-border w-max rounded-xl",
-              "h-max py-10",
+              "h-max py-10 bg-dark",
             )}
             onSubmit={(e) => {
               e.preventDefault();
@@ -52,7 +58,7 @@ export const AdminSecurityTips = () => {
               <input
                 type="text"
                 className={cn(
-                  "p-3 bg-deep w-100 rounded-md border outline-none",
+                  "p-3 bg-border w-100 rounded-md border outline-none",
                 )}
                 value={title}
                 onChange={(e) => {
@@ -72,6 +78,7 @@ export const AdminSecurityTips = () => {
               <textarea
                 className={cn(
                   "resize-none p-3 bg-deep w-100 rounded-md border outline-none h-50",
+                  "bg-border",
                 )}
                 value={message}
                 onChange={(e) => {
@@ -120,7 +127,7 @@ export const AdminSecurityTips = () => {
           <div
             className={cn(
               "shadow-xl border border-border rounded-xl w-100 p-4 cursor-default",
-              "overflow-auto h-[70vh]",
+              "overflow-auto h-[70vh] bg-dark",
             )}
           >
             <h2 className={cn("text-xl mb-5")}>All Tips</h2>

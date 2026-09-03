@@ -19,7 +19,13 @@ export const AdminAlertsPage = () => {
   return (
     <div className={cn("flex text-custom-white relative")}>
       <AdminSideBar active="alerts" />
-      <section className={cn("w-full p-3")}>
+      <section className={cn("w-full p-3 relative")}>
+        <div
+          className={cn(
+            "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center",
+            "absolute w-full h-full inset-0 z-[-1] opacity-20",
+          )}
+        ></div>
         {showBox &&
           runShowBox({
             reportId: reportData?.reportId,

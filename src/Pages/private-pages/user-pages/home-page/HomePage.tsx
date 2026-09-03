@@ -24,8 +24,14 @@ export const HomePage = () => {
       <SideBar active={"home"} />
       <section
         id="home-page"
-        className={cn("h-full w-full text-custom-white p-3")}
+        className={cn("h-full w-full text-custom-white p-3 relative")}
       >
+        <div
+          className={cn(
+            "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center",
+            "absolute w-full h-full inset-0 z-[-1] opacity-20",
+          )}
+        ></div>
         <div
           className={cn(
             "mobile:flex mobile:items-center mobile:justify-between gap-2 mobile:flex-wrap",
@@ -69,7 +75,7 @@ export const HomePage = () => {
               key={index}
               className={cn(
                 "bg-deep px-2 py-4 rounded-md flex flex-col",
-                "items-center gap-2 cursor-default",
+                "items-center gap-2 cursor-default shadow-xl",
               )}
               onClick={async () => {
                 if (action.name === "Report a Crime") {

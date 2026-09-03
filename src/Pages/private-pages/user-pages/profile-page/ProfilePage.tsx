@@ -29,6 +29,12 @@ export const ProfilePage = () => {
       <section
         className={cn("w-full text-custom-white p-3 overflow-auto relative")}
       >
+        <div
+          className={cn(
+            "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center",
+            "absolute w-full h-full inset-0 z-[-1] opacity-20",
+          )}
+        ></div>
         <InAppHeader
           content="User Profile"
           routeBack="/home"

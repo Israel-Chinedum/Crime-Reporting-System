@@ -9,12 +9,18 @@ export const SafetyTipsPage = () => {
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
       <SideBar active="home" />
-      <div className={cn("w-full p-3")}>
+      <div className={cn("w-full p-3 relative")}>
         <InAppHeader
           content=""
           routeBack="/home"
           arrowClasses="text-custom-white text-xl"
         />
+        <div
+          className={cn(
+            "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center",
+            "absolute w-full h-full inset-0 z-[-1] opacity-20",
+          )}
+        ></div>
 
         <section
           className={cn(
@@ -27,7 +33,10 @@ export const SafetyTipsPage = () => {
               <p>No tips yet!</p>
             ) : (
               tips.map((tip: any) => (
-                <div key={tip.title} className={cn("bg-deep p-4 rounded-md")}>
+                <div
+                  key={tip.title}
+                  className={cn("bg-deep p-4 rounded-md shadow-xl")}
+                >
                   <h2 className={cn("text-xl font-bold")}>{tip.title}</h2>
                   <p
                     className={cn("text-gray-400 bg-navy p-2 rounded-md mt-2")}

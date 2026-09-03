@@ -17,9 +17,15 @@ export const AdminReportsPage = () => {
       <AdminSideBar active="reports" />
       <section
         className={cn(
-          "text-custom-white p-3 overflow-y-auto w-full select-none",
+          "text-custom-white p-3 overflow-y-auto w-full select-none relative",
         )}
       >
+        <div
+          className={cn(
+            "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center",
+            "absolute w-full h-full inset-0 z-[-1] opacity-3",
+          )}
+        ></div>
         {showBox &&
           runShowBox({
             reportId: reportData?.reportId,

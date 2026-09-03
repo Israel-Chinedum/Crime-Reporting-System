@@ -19,9 +19,15 @@ export const TrackMyReport = () => {
         <section
           className={cn(
             "text-custom-white w-[95%] mx-auto",
-            "sm:w-[80%] md:w-[70%] lg:w-[60%]",
+            "sm:w-[80%] md:w-[70%] lg:w-[60%] relative",
           )}
         >
+          <div
+            className={cn(
+              "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center",
+              "absolute w-full h-full inset-0 z-[-1] opacity-20",
+            )}
+          ></div>
           <h2 className={cn("text-2xl font-bold")}>Track My Reports</h2>
           <h2 className={cn("text-gray-400")}>
             Monitor the status of your submitted reports.
@@ -37,6 +43,7 @@ export const TrackMyReport = () => {
                 <div
                   className={cn(
                     "flex justify-between items-start bg-deep p-4 rounded-xl",
+                    "shadow-xl",
                   )}
                   key={report.reportId}
                 >

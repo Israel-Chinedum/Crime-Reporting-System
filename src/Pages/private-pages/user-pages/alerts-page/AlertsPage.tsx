@@ -12,9 +12,15 @@ export const AlertsPage = () => {
       <section
         className={cn(
           "text-custom-white p-3 h-dvh",
-          "grid grid-rows-[50px_1fr] w-full overflow-auto",
+          "grid grid-rows-[50px_1fr] w-full overflow-auto relative",
         )}
       >
+        <div
+          className={cn(
+            "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center",
+            "absolute w-full h-full inset-0 z-[-1] opacity-20",
+          )}
+        ></div>
         <InAppHeader
           content="Notifications"
           routeBack="/home"
