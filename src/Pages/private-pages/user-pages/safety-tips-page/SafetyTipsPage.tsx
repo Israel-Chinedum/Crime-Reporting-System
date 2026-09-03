@@ -9,7 +9,7 @@ export const SafetyTipsPage = () => {
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
       <SideBar active="home" />
-      <div className={cn("w-full p-3 relative")}>
+      <div className={cn("w-full p-3 relative h-dvh overflow-auto")}>
         <InAppHeader
           content=""
           routeBack="/home"

@@ -10,7 +10,7 @@ export const TrackMyReport = () => {
   return (
     <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
       <SideBar active="home" />
-      <div className={cn("w-full flex flex-col p-3 h-dvh")}>
+      <div className={cn("w-full flex flex-col p-3 h-dvh overflow-auto")}>
         <InAppHeader
           content=""
           routeBack="/home"
@@ -25,7 +25,7 @@ export const TrackMyReport = () => {
           <div
             className={cn(
               "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center",
-              "absolute w-full h-full inset-0 z-[-1] opacity-20",
+              "absolute w-full inset-0 z-[-1] opacity-20",
             )}
           ></div>
           <h2 className={cn("text-2xl font-bold")}>Track My Reports</h2>
