@@ -50,7 +50,12 @@ export const ReportStatus = () => {
             "mt-auto mobile:mt-20 gap-3 w-full items-center justify-center flex flex-col mobile:flex-row",
           )}
         >
-          <Button classes="text-[16px] w-full mobile:w-60">Track Report</Button>
+          <Button
+            onClick={() => navigate("/track-my-reports")}
+            classes="text-[16px] w-full mobile:w-60"
+          >
+            Track Report
+          </Button>
           <Button
             onClick={() => navigate("/home")}
             classes="text-[16px] bg-custom-blue w-full mobile:w-60"
