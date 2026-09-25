@@ -6,8 +6,14 @@ import { FaArrowLeft } from "react-icons/fa";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
-  const { username, password, postFormData, loadAnimation, runLoadAnimation } =
-    useLogin();
+  const {
+    username,
+    password,
+    postFormData,
+    loadAnimation,
+    runLoadAnimation,
+    forgotPassword,
+  } = useLogin();
 
   return (
     <section className={cn(" h-dvh text-custom-white flex flex-col relative")}>
@@ -54,7 +60,10 @@ export const LoginPage = () => {
         >
           Login
         </Button>
-        <Button classes="w-[95%] mobile:w-full smobile:w-[80%] bg-custom-blue text-[16px] mobile:text-xl">
+        <Button
+          onClick={forgotPassword}
+          classes="w-[95%] mobile:w-full smobile:w-[80%] bg-custom-blue text-[16px] mobile:text-xl"
+        >
           Forgot password
         </Button>
       </form>

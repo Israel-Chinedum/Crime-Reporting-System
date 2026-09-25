@@ -6,7 +6,7 @@ import { useLoadAnimation } from "../../../Hooks/useLoadAnimation";
 
 export const useLogin = () => {
   const { postRequest } = useFetch();
-  const { showMessage, closeMessage } = useMessage();
+  const { showMessage, closeMessage, getUserChoice } = useMessage();
   const navigate = useNavigate();
   const { loadAnimation, runLoadAnimation, setLoadAnimation } =
     useLoadAnimation();
@@ -47,5 +47,75 @@ export const useLogin = () => {
     }
   };
 
-  return { password, username, postFormData, loadAnimation, runLoadAnimation };
+  const forgotPassword = async () => {
+    showMessage({
+      text: "Enter your registered email",
+      status: "normal",
+      customRes: true,
+    });
+
+    const email = await getUserChoice();
+
+    setLoadAnimation({ state: true, message: "Sending OTP..." });
+
+    const { error, response } = await postRequest({
+      route: "/user/send-otp",
+      data: { email },
+      type: "object",
+    });
+
+    if (error) {
+      setLoadAnimation({ state: false });
+      showMessage({ text: error, status: "error" });
+    }
+
+    if (response) {
+      setLoadAnimation({ state: false });
+
+      showMessage({
+        text: "An OTP was just sent to your email address please enter it below",
+        status: "normal",
+        customRes: true,
+      });
+
+      const otp = await getUserChoice();
+
+      if (response) {
+        showMessage({
+          text: "Enter new password",
+          status: "normal",
+          customRes: true,
+        });
+
+        const password = await getUserChoice();
+
+        setLoadAnimation({ state: true, message: "Updating user password..." });
+
+        const { error, response } = await postRequest({
+          route: "/user/update-password",
+          data: { email, otp, password },
+          type: "object",
+        });
+
+        if (error) {
+          setLoadAnimation({ state: false });
+          showMessage({ text: error, status: "error" });
+        }
+
+        if (response) {
+          setLoadAnimation({ state: false });
+          showMessage({ text: response.message, status: "success" });
+        }
+      }
+    }
+  };
+
+  return {
+    password,
+    username,
+    postFormData,
+    loadAnimation,
+    runLoadAnimation,
+    forgotPassword,
+  };
 };
