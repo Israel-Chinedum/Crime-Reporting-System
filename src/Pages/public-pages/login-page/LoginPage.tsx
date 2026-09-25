@@ -19,7 +19,7 @@ export const LoginPage = () => {
     <section className={cn(" h-dvh text-custom-white flex flex-col relative")}>
       <div
         className={cn(
-          "absolute bg-[url('./fpog-logo.png')] w-full h-full bg-no-repeat",
+          "absolute bg-[url('/fpog-logo.png')] w-full h-full bg-no-repeat",
           "bg-center z-[-1] opacity-10",
         )}
       ></div>
