@@ -32,7 +32,7 @@ export const getLocation = async () => {
               "Failed to get user location! Ensure location access is not blocked in browser settings!",
             );
         },
-        { timeout: 10000, maximumAge: 0 },
+        { timeout: 30000, maximumAge: 0 },
       );
     });
   } else {
