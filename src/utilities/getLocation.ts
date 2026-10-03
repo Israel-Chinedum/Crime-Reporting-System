@@ -25,6 +25,8 @@ export const getLocation = async () => {
             reject(
               "Permission denied or position unavailable! Ensure location access is not blocked in browser settings!",
             );
+          } else if (error.code === error.TIMEOUT) {
+            reject("Took too long to get user location!");
           } else
             reject(
               "Failed to get user location! Ensure location access is not blocked in browser settings!",
