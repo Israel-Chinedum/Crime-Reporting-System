@@ -36,13 +36,15 @@ export const NearbyStationsPage = () => {
           <h2 className={cn("text-2xl font-bold mt-4")}>Nearby stations</h2>
 
           {locationDetails && (
-            <Map
-              userLocation={{
-                lat: Number(locationDetails?.userLat),
-                lng: Number(locationDetails?.userLng),
-              }}
-              stations={locationDetails?.coordinates!}
-            />
+            <div className={cn("h-[50vh] sm:h-[70vh]")}>
+              <Map
+                userLocation={{
+                  lat: Number(locationDetails?.userLat),
+                  lng: Number(locationDetails?.userLng),
+                }}
+                stations={locationDetails?.coordinates!}
+              />
+            </div>
           )}
 
           <div className={cn("bg-deep p-4 rounded-xl mt-4")}>

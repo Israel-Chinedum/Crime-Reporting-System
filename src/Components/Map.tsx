@@ -20,7 +20,7 @@ export const Map = ({
     <MapContainer
       center={[userLocation.lat, userLocation.lng]}
       zoom={14}
-      style={{ height: "70vh", width: "100%" }}
+      style={{ height: "100%", width: "100%" }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -33,8 +33,8 @@ export const Map = ({
       </Marker>
 
       {stations.map((station) => (
-        <>
-          <Marker key={station.name} position={[station.lat, station.lng]}>
+        <div key={station.name}>
+          <Marker position={[station.lat, station.lng]}>
             <Tooltip permanent>Security Station</Tooltip>
             <Popup>{station.name}</Popup>
           </Marker>
@@ -50,7 +50,7 @@ export const Map = ({
               dashArray: "10 10",
             }}
           />
-        </>
+        </div>
       ))}
     </MapContainer>
   );
