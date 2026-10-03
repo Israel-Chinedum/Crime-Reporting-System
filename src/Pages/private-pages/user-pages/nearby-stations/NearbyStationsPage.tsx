@@ -59,7 +59,12 @@ export const NearbyStationsPage = () => {
                 </h2>
               )}
               <div className={cn("sm:w-60")}>
-                <Button classes="mt-2 w-full">Retry</Button>
+                <Button
+                  classes="mt-2 w-full"
+                  onClick={() => setRetry((prev) => prev + 1)}
+                >
+                  Retry
+                </Button>
               </div>
             </>
           </div>
