@@ -1,4 +1,3 @@
-import { FaAngleRight } from "react-icons/fa";
 import { cn } from "../../../../utilities/classNames";
 import { SideBar } from "../../../../Components/SideBar";
 import { useTrackMyReport } from "./useTrackMyReport";
@@ -8,34 +7,37 @@ export const TrackMyReport = () => {
   const { myReports } = useTrackMyReport();
 
   return (
-    <div className={cn("flex h-dvh", "sm:flex-row", "flex-col-reverse")}>
+    <div className={cn("flex h-dvh ", "sm:flex-row", "flex-col-reverse")}>
       <SideBar active="home" />
-      <div className={cn("w-full flex flex-col p-3 h-dvh overflow-auto")}>
+
+      <div
+        className={cn(
+          "w-full flex flex-col h-full py-3 relative overflow-auto",
+        )}
+      >
+        <div
+          className={cn(
+            "bg-[url('/fpog-logo.png')] bg-no-repeat bg-center",
+            "absolute w-full h-full inset-0 z-[-1] opacity-20 bg-size-[150%_80%] sm:bg-auto ",
+          )}
+        ></div>
         <InAppHeader
           content=""
           routeBack="/home"
-          arrowClasses="text-custom-white text-xl"
+          arrowClasses="text-custom-white text-xl ml-4"
         />
         <section
           className={cn(
-            "text-custom-white w-[95%] mx-auto",
-            "sm:w-[80%] md:w-[70%] lg:w-[60%] relative",
+            "text-custom-white px-[2.5%] w-full h-full overflow-auto",
+            "sm:px-[10%] md:px-[15%] lg:px-[20%] relative",
           )}
         >
-          <div
-            className={cn(
-              "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center",
-              "absolute w-full inset-0 z-[-1] opacity-20",
-            )}
-          ></div>
           <h2 className={cn("text-2xl font-bold mt-9")}>Track My Reports</h2>
           <h2 className={cn("text-gray-400")}>
             Monitor the status of your submitted reports.
           </h2>
 
-          <div
-            className={cn("mt-5 flex flex-col gap-4 h-[87dvh] overflow-y-auto")}
-          >
+          <div className={cn("mt-5 flex flex-col gap-4 ")}>
             {myReports.length === 0 ? (
               <h2>No reports yet!</h2>
             ) : (
@@ -63,9 +65,6 @@ export const TrackMyReport = () => {
                         {report.status === "active"
                           ? "Under review"
                           : "Resolved"}
-                      </h2>
-                      <h2 className={cn("flex items-center cursor-pointer")}>
-                        View <FaAngleRight />
                       </h2>
                     </div>
                     <h2 className={cn("text-xl font-bold")}>Robbery</h2>

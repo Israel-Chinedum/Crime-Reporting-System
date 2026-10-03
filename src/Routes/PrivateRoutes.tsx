@@ -15,6 +15,7 @@ import { UserGuard } from "../Guards/UserGuard";
 import { TrackMyReport } from "../Pages/private-pages/user-pages/track-my-report-page/TrackMyReport";
 import { SafetyTipsPage } from "../Pages/private-pages/user-pages/safety-tips-page/SafetyTipsPage";
 import { AdminSettings } from "../Pages/private-pages/admin-pages/admin-settings-page/AdminSettings";
+import { NearbyStationsPage } from "../Pages/private-pages/user-pages/nearby-stations/NearbyStationsPage";
 
 export const PrivateRoutes = () => {
   return (
@@ -46,6 +47,9 @@ export const PrivateRoutes = () => {
 
         {/* ====== SECURITY TIPS PAGE ====== */}
         <Route path="/safety-tips" element={<SafetyTipsPage />} />
+
+        {/* ====== NEARBY STATIONS PAGE ====== */}
+        <Route path="/nearby-stations" element={<NearbyStationsPage />} />
       </Route>
       {/* /
       /

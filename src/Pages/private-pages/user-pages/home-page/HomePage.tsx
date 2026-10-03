@@ -28,7 +28,7 @@ export const HomePage = () => {
       >
         <div
           className={cn(
-            "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center",
+            "bg-[url('/fpog-logo.png')] bg-no-repeat  bg-center bg-size-[150%_90%] sm:bg-auto",
             "absolute w-full h-full inset-0 z-[-1] opacity-20",
           )}
         ></div>
@@ -99,6 +99,9 @@ export const HomePage = () => {
                 }
                 if (action.name === "Safety Tips") {
                   navigate("/safety-tips");
+                }
+                if (action.name === "Nearby Stations") {
+                  navigate("/nearby-stations");
                 }
               }}
             >

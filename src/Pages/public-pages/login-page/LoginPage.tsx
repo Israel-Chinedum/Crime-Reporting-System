@@ -20,7 +20,7 @@ export const LoginPage = () => {
       <div
         className={cn(
           "absolute bg-[url('/fpog-logo.png')] w-full h-full bg-no-repeat",
-          "bg-center z-[-1] opacity-10",
+          "bg-center z-[-1] opacity-10 bg-size-[150%_80%] sm:bg-auto",
         )}
       ></div>
       {loadAnimation.state && runLoadAnimation()}

@@ -20,12 +20,16 @@ export const useLoadAnimation = () => {
         )}
       >
         <div
-          className={cn(
-            "w-10 h-10 rounded-full border-t-5 border-l-5 border-dotted border-white",
-            "animate-spin [animation-duration:0.5s]",
-          )}
-        ></div>
-        {loadAnimation.message}
+          className={cn("bg-dark rounded-md px-4 py-2 flex gap-4 items-center")}
+        >
+          <div
+            className={cn(
+              "w-10 h-10 rounded-full border-t-5 border-l-5 border-dotted border-white",
+              "animate-spin [animation-duration:0.5s]",
+            )}
+          ></div>
+          {loadAnimation.message}
+        </div>
       </div>
     );
   };
