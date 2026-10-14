@@ -18,8 +18,8 @@ export const LandingPage = () => {
     >
       <div
         className={cn(
-          "bg-[url('/landing-page.png')] w-full h-full bg-cover bg-center absolute z-[-1] opacity-5",
-          "bg-size-[250%_100%] sm:bg-auto bg-no-repeat",
+          "bg-[url('/landing-page.png')] w-full h-full bg-cover sm:bg-center bg-position-[70%_50%] absolute z-[-1] opacity-30",
+          "sm:bg-size-[100%_100%] bg-size-[230%_80%] bg-no-repeat",
         )}
       ></div>
 
