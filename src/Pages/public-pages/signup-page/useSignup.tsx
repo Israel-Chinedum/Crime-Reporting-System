@@ -11,6 +11,10 @@ export const useSignup = () => {
   const form = useRef<HTMLFormElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const confirmPassword = useRef<HTMLInputElement>(null);
+  const matric = useRef<HTMLInputElement>(null);
+
+  const matricRegex =
+    /^(?:ND\d{4}\/\d{4}\/0{0,4}\d{1,3}|FPOG\d{2}\/HND\/[A-Z]+\/0{0,4}\d{1,3})$/;
 
   const match = (a: string, b: string) => {
     return a === b ? true : false;
@@ -21,7 +25,14 @@ export const useSignup = () => {
       form.current.onsubmit = async (e) => {
         e.preventDefault();
 
-        if (password.current && confirmPassword.current) {
+        if (password.current && confirmPassword.current && matric.current) {
+          if (!matricRegex.test(matric.current.value)) {
+            return showMessage({
+              text: "Invalid matric number!",
+              status: "warning",
+            });
+          }
+
           const passwordsMatch = match(
             password.current.value,
             confirmPassword.current?.value,
@@ -49,7 +60,7 @@ export const useSignup = () => {
               text: response.message,
               status: "success",
               pos_y: "mid",
-             });
+            });
             showMessage({
               text: "Redirecting to login page",
               status: "pending",
@@ -67,5 +78,5 @@ export const useSignup = () => {
     }
   };
 
-  return { form, password, confirmPassword, postFormData };
+  return { form, password, confirmPassword, matric, postFormData };
 };

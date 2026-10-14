@@ -6,7 +6,7 @@ import { FaArrowLeft } from "react-icons/fa";
 
 export const Signup = () => {
   const navigate = useNavigate();
-  const { form, password, confirmPassword, postFormData } = useSignup();
+  const { form, password, confirmPassword, matric, postFormData } = useSignup();
 
   return (
     <section className={cn(" text-custom-white h-dvh flex flex-col")}>
@@ -52,9 +52,10 @@ export const Signup = () => {
         <input
           required
           className={cn("input")}
-          type="number"
+          type="text"
           placeholder="Matric number"
           name="Matric_Number"
+          ref={matric}
         />
         <input
           required
