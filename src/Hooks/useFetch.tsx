@@ -139,7 +139,11 @@ export const useFetch = () => {
     }
 
     let accessToken = "";
-    if (route !== "/user/signin" && route !== "/admin/signin") {
+    if (
+      route !== "/user/signin" &&
+      route !== "/admin/signin" &&
+      route !== "/user"
+    ) {
       const userData = JSON.parse(localStorage.getItem("userData")!);
       accessToken = userData.accessToken;
     }
