@@ -14,7 +14,7 @@ export const useSignup = () => {
   const matric = useRef<HTMLInputElement>(null);
 
   const matricRegex =
-    /^(?:ND\d{4}\/\d{4}\/0{0,4}\d{1,3}|FPOG\d{2}\/HND\/[A-Z]+\/0{0,4}\d{1,3})$/;
+    /^(?:ND\d{4}\/\d{4}\/0{0,4}\d{1,3}|FPOG\d{2}\/HND\/[A-Z]+\/0{0,4}\d{1,3}|\d{4}\/HND2\/[A-Z]+\/0{0,4}\d{1,3})$/;
 
   const match = (a: string, b: string) => {
     return a === b ? true : false;
