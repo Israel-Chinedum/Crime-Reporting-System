@@ -142,7 +142,8 @@ export const useFetch = () => {
     if (
       route !== "/user/signin" &&
       route !== "/admin/signin" &&
-      route !== "/user"
+      route !== "/user" &&
+      route !== "/user/send-otp"
     ) {
       const userData = JSON.parse(localStorage.getItem("userData")!);
       accessToken = userData.accessToken;
