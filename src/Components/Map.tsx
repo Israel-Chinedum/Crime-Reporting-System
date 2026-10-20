@@ -14,6 +14,7 @@ type Station = {
   name: string;
   lat: number;
   lng: number;
+  distance: number;
 };
 
 type MapProps = {
@@ -49,7 +50,18 @@ export const Map = ({ stations, userLocation, userLocationName }: MapProps) => {
         <Fragment key={`${station.name}-${station.lat}-${station.lng}`}>
           <Marker position={[station.lat, station.lng]}>
             <Tooltip permanent>Security Station</Tooltip>
-            <Popup>{station.name}</Popup>
+            <Popup>
+              <div>
+                <p>
+                  <b>Station: </b>
+                  {station.name}
+                </p>
+                <p>
+                  <b>Distance: </b>
+                  {station.distance / 1000}km
+                </p>
+              </div>
+            </Popup>
           </Marker>
 
           <Polyline
