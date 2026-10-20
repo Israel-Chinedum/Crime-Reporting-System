@@ -6,16 +6,23 @@ import {
   TileLayer,
   Tooltip,
 } from "react-leaflet";
+import { Fragment } from "react";
 
 import "leaflet/dist/leaflet.css";
 
-export const Map = ({
-  stations,
-  userLocation,
-}: {
-  stations: any[];
+type Station = {
+  name: string;
+  lat: number;
+  lng: number;
+};
+
+type MapProps = {
+  stations: Station[];
   userLocation: { lat: number; lng: number };
-}) => {
+  userLocationName: string;
+};
+
+export const Map = ({ stations, userLocation, userLocationName }: MapProps) => {
   return (
     <MapContainer
       center={[userLocation.lat, userLocation.lng]}
@@ -27,13 +34,19 @@ export const Map = ({
         attribution="&copy; OpenStreetMap contributors"
       />
 
+      {/* User's current location */}
       <Marker position={[userLocation.lat, userLocation.lng]}>
         <Tooltip permanent>You</Tooltip>
-        <Popup>Your location</Popup>
+        <Popup>
+          {userLocationName.toLowerCase() === "unavailable"
+            ? "Your location"
+            : userLocationName}
+        </Popup>
       </Marker>
 
+      {/* Nearby security stations and routes */}
       {stations.map((station) => (
-        <div key={station.name}>
+        <Fragment key={`${station.name}-${station.lat}-${station.lng}`}>
           <Marker position={[station.lat, station.lng]}>
             <Tooltip permanent>Security Station</Tooltip>
             <Popup>{station.name}</Popup>
@@ -50,7 +63,7 @@ export const Map = ({
               dashArray: "10 10",
             }}
           />
-        </div>
+        </Fragment>
       ))}
     </MapContainer>
   );

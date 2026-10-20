@@ -16,7 +16,7 @@ export const useNearbyStations = () => {
   const [locationDetails, setLocationDetails] = useState<{
     userLat: string;
     userLng: string;
-    coordinates: any[];
+    coordinates: any;
   } | null>(null);
 
   const getSecurityLocations = async () => {

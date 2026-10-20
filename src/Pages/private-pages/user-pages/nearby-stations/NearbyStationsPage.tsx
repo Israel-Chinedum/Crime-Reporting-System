@@ -42,7 +42,8 @@ export const NearbyStationsPage = () => {
                   lat: Number(locationDetails?.userLat),
                   lng: Number(locationDetails?.userLng),
                 }}
-                stations={locationDetails?.coordinates!}
+                stations={locationDetails?.coordinates.security_locations!}
+                userLocationName={locationDetails?.coordinates.user_location!}
               />
             </div>
           )}
