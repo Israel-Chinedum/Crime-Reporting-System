@@ -17,7 +17,7 @@ export const AdminReportsPage = () => {
       <AdminSideBar active="reports" />
       <section
         className={cn(
-          "text-custom-white p-3 overflow-y-auto w-full select-none relative",
+          "text-custom-white p-3 overflow-y-auto w-full select-none",
         )}
       >
         <div
@@ -104,7 +104,9 @@ export const AdminReportsPage = () => {
                     />
                     <div className={cn("relative all-reports-action-div")}>
                       <MdMoreVert
-                        className={cn("cursor-pointer hover:text-blue-600")}
+                        className={cn(
+                          "cursor-pointer hover:text-blue-600 more_action",
+                        )}
                         onClick={toggleActVisibility}
                       />
                       <ul

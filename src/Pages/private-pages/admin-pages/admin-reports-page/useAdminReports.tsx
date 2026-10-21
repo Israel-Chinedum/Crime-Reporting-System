@@ -40,6 +40,18 @@ export const useAdminReports = ({
   };
 
   //   ====== TOGGLE ACTION VISIBILITY ======
+
+  window.onclick = (e) => {
+    const actDiv = document.getElementsByClassName("all-reports-action-div");
+    const element = e.target as HTMLElement;
+
+    for (let i of actDiv) {
+      if (!element.classList.contains("more_action")) {
+        i.children[1].classList.add("hidden");
+      }
+    }
+  };
+
   const toggleActVisibility = (event: React.MouseEvent) => {
     const actDiv = document.getElementsByClassName("all-reports-action-div");
     const targetEl = event.currentTarget?.parentElement;
@@ -102,7 +114,7 @@ export const useAdminReports = ({
     return new Promise((resolve) => {
       socket.emit("get-evidence", reportId, (response: any) => {
         if (response.error) {
-          showMessage({ text: response.error, status: "error", timeout: 7000 });
+          // showMessage({ text: response.error, status: "error", timeout: 7000 });
           return;
         }
         resolve(response);

@@ -6,6 +6,7 @@ import { FaBarsProgress } from "react-icons/fa6";
 import { DoughnutChart } from "../../../../Components/DoughnutChart";
 import { TrendChart } from "../../../../Components/TrendChart";
 import { useAdminDashboard } from "./useAdminDashboard";
+import { useNavigate } from "react-router-dom";
 
 export const AdminDashboard = () => {
   const {
@@ -16,13 +17,13 @@ export const AdminDashboard = () => {
     recentReports,
   } = useAdminDashboard();
 
+  const navigate = useNavigate();
+
   return (
-    <div className={cn("flex")}>
+    <div className={cn("flex relative")}>
       <AdminSideBar active="dashboard" />
       <section
-        className={cn(
-          "text-custom-white w-full h-dvh  overflow-y-auto p-3 relative",
-        )}
+        className={cn("text-custom-white w-full h-dvh  overflow-y-auto p-3")}
       >
         <div
           className={cn(
@@ -39,10 +40,14 @@ export const AdminDashboard = () => {
                   "flex items-center gap-4 bg-deep p-2 h-max w-max rounded-md",
                 )}
               >
-                <p>May 21, 2026</p>
+                <p>{new Date().toDateString()}</p>
                 <FaCalendar />
               </div>
-              <div className={cn("w-15 h-15 rounded-full bg-deep")}></div>
+              <div
+                className={cn(
+                  "w-15 h-15 rounded-full bg-white bg-[url('/fpog-logo.png')] bg-no-repeat bg-cover  bg-center",
+                )}
+              ></div>
             </div>
           </div>
         </div>
@@ -242,7 +247,10 @@ export const AdminDashboard = () => {
         <div className={cn("mt-10 mb-5 bg-deep p-3 rounded-xl shadow-xl")}>
           <div className={cn("mb-4 flex items-center justify-between")}>
             <h1 className={cn("text-xl font-bold")}>Recent Reports</h1>
-            <p className={cn("text-blue-600 cursor-pointer")}>
+            <p
+              className={cn("text-blue-600 cursor-pointer hover:underline")}
+              onClick={() => navigate("/admin-reports")}
+            >
               View All Reports
             </p>
           </div>

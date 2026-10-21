@@ -41,8 +41,8 @@ export const useReportBox = ({ controls = true }: { controls?: boolean }) => {
     return (
       <div
         className={cn(
-          "text-white w-150 mt-[2dvh] h-[90dvh] overflow-y-auto bg-dark px-10 py-15 rounded-xl gap-4 grid left-[50%] translate-x-[-50%] absolute z-10",
-          evidence_provided && "grid-cols-2 w-250",
+          "text-white w-full h-dvh overflow-y-auto bg-dark px-10 py-15 gap-4 grid left-[50%] translate-x-[-50%] fixed top-0 z-10",
+          evidence_provided && "grid-cols-2",
         )}
       >
         {/* ====== REPORT DETAILS ====== */}
@@ -108,7 +108,7 @@ export const useReportBox = ({ controls = true }: { controls?: boolean }) => {
                 defaultValue={description}
                 id=""
                 className={cn(
-                  "bg-navy w-full border-2 rounded-xl max-h-50 p-2 resize-none",
+                  "bg-navy w-full border-2 rounded-xl h-40 p-2 resize-none",
                 )}
               ></textarea>
             </li>
@@ -178,7 +178,7 @@ export const useReportBox = ({ controls = true }: { controls?: boolean }) => {
                   reportId: reportId,
                 });
               }}
-              classes="bg-custom-green"
+              classes="bg-custom-green h-12"
             >
               Resolve
             </Button>
@@ -192,7 +192,7 @@ export const useReportBox = ({ controls = true }: { controls?: boolean }) => {
                   reportId: reportId,
                 });
               }}
-              classes="bg-custom-orange"
+              classes="bg-custom-orange h-12"
             >
               Activate
             </Button>
@@ -206,7 +206,7 @@ export const useReportBox = ({ controls = true }: { controls?: boolean }) => {
                   reportId: reportId,
                 });
               }}
-              classes="bg-accent"
+              classes="bg-accent h-12"
             >
               Delete
             </Button>
